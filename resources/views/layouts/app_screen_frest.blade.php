@@ -52,11 +52,14 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/select2/select2.css') }}" />
 
     <!-- Page CSS -->
 
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/my_custom.css') }}" />
 
+    @stack('stylesheets')
 
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
 
@@ -66,6 +69,29 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".select2").select2()
+        })
+
+        $(document).ready(function () {
+            $(".delete").click(function (e) {
+                return confirm('Are you sure you want to delete?')
+            })
+        })
+
+        $(document).ready(function () {
+            $.each($(".req"), function(i, j){
+                var label = $(this).html();
+                $(this).html(label+" <span class='starik' style='color:red;font-size:11px;'>*</span>");
+            })
+
+        });
+
+
+
+    </script>
 </head>
 
 <body>
@@ -73,6 +99,7 @@
 <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
         <!-- Menu -->
+
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
@@ -128,6 +155,7 @@
                             )");
                 })->where('app_id', '=', $current_app->id)->get();
                 // dd($menu_r->toSql());
+
             @endphp
 
 
@@ -149,6 +177,9 @@
                         <ul class="menu-sub" data-submenu-title="{{ $menu->title }}">
                             @foreach($menu->myPermissions as $mp)
                                 @foreach($mp->routes as $mpr)
+
+                                    @continue($mp->show_in_menu == "no")
+
                                     <li class="menu-item @if(\Illuminate\Support\Facades\Route::currentRouteName() == $mpr->route) active @endif">
                                         <a href="{{ route($mpr->route) }}" class="menu-link">
                                             {{ $mpr->title }}
@@ -732,21 +763,23 @@
                     <div class="row">
                         <div class="col-12">
                             @if(\Illuminate\Support\Facades\Session::has('error'))
-                                <div class="alert alert-danger alert-styled-left alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                    <span
-                                            class="font-weight-semibold">Error! </span> {{ \Illuminate\Support\Facades\Session::get('error') }}
-                                    .
+
+                                <div class="alert alert-solid-danger alert-dismissible" role="alert">
+                                    <h6 class="alert-heading mb-1"><i class="bx bx-xs bx-desktop align-top me-2"></i>Error!</h6>
+                                    <span>{{ \Illuminate\Support\Facades\Session::get('error') }}</span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
+
                             @endif
 
                             @if(\Illuminate\Support\Facades\Session::has('success'))
-                                <div class="alert alert-success alert-styled-left alert-dismissible">
-                                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
-                                    <span
-                                            class="font-weight-semibold">Success! </span> {{ \Illuminate\Support\Facades\Session::get('success') }}
-                                    .
+
+                                <div class="alert alert-solid-success alert-dismissible" role="alert">
+                                    <h6 class="alert-heading mb-1"><i class="bx bx-xs bx-desktop align-top me-2"></i>Success!</h6>
+                                    <span>{{ \Illuminate\Support\Facades\Session::get('success') }}</span>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                                 </div>
+
                             @endif
                         </div>
                     </div>
@@ -800,9 +833,12 @@
 <!-- endbuild -->
 
 <!-- Vendors JS -->
+<script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
 
 <!-- Main JS -->
 <script src="{{ asset('assets/js/main.js') }}"></script>
+
+@stack('scripts')
 
 <!-- Page JS -->
 </body>

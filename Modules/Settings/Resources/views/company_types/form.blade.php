@@ -2,10 +2,8 @@
 @php $app_id = config('settings.app_id') @endphp
 
 @push('scripts')
-    <script src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            $(".select2").select2()
 
         })
 
@@ -79,12 +77,12 @@
                             <div class="row">
                                 <div class="col-12">
 
-                                    <a href="{{ route('settings.company-types.list') }}" class="btn btn-warning btn-sm">
-                                        <i class="icon-arrow-left16 mr-1"></i> Back
+                                    <a href="{{ route('settings.company-types.list') }}" class="btn btn-warning">
+                                        <i class="bx bx-arrow-back"></i> Back
                                     </a>
 
-                                    <button type="submit" class="btn btn-info btn-sm">
-                                        <i class="icon-database-check mr-1"></i> Save
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bx bx-save"></i> Save
                                     </button>
 
                                 </div>

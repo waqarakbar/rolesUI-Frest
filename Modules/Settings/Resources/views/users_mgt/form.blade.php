@@ -3,13 +3,9 @@
 
 @push('scripts')
 
-    <script src="{{ asset('assets/js/plugins/forms/selects/select2.min.js') }}"></script>
-
     <script type="text/javascript">
 
         $(document).ready(function () {
-
-            $(".select2").select2()
 
             $("#company_id").change(function(){
                 var company_id = $(this).val()
@@ -181,7 +177,7 @@
 
                                         <span
                                             class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('company_id') !!} @endif</span>
-                                        {!! Form::select('company_id', [null=>'Select '.config('settings.company_title')]+$companies_dd, NULL, ['class' => 'form-control', 'id' => 'company_id', 'required' => 'required']) !!}
+                                        {!! Form::select('company_id', [null=>'Select '.config('settings.company_title')]+$companies_dd, NULL, ['class' => 'form-select select2', 'id' => 'company_id', 'required' => 'required']) !!}
                                     </div>
                                 </div>
 
@@ -191,7 +187,7 @@
 
                                         <span
                                             class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('section_id') !!} @endif</span>
-                                        {!! Form::select('section_id', [null=>'Select '.config('settings.section_title')]+$sections->toArray(), NULL, ['class' => 'form-control', 'id' => 'section_id']) !!}
+                                        {!! Form::select('section_id', [null=>'Select '.config('settings.section_title')]+$sections->toArray(), NULL, ['class' => 'form-select select2', 'id' => 'section_id']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +200,7 @@
 
                                         <span
                                             class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('parent_id') !!} @endif</span>
-                                        {!! Form::select('parent_id', [null=>'This is a Parent User']+$parent_users->toArray(), NULL, ['class' => 'form-control', 'id' => 'parent_id']) !!}
+                                        {!! Form::select('parent_id', [null=>'This is a Parent User']+$parent_users->toArray(), NULL, ['class' => 'form-select select2', 'id' => 'parent_id']) !!}
                                     </div>
                                 </div>
 
@@ -214,7 +210,7 @@
 
                                         <span
                                             class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('role_id[]') !!} @endif</span>
-                                        {!! Form::select('role_id[]', $roles->toArray(), ($item->exists & $item->roles->count() > 0) ? $item->roles : null, ['class' => 'form-control select2', 'id' => 'role_id[]', 'multiple' => 'multiple']) !!}
+                                        {!! Form::select('role_id[]', $roles->toArray(), ($item->exists & $item->roles->count() > 0) ? $item->roles : null, ['class' => 'form-select select2', 'id' => 'role_id[]', 'multiple' => 'multiple']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -236,12 +232,12 @@
                             <div class="row">
                                 <div class="col-12">
 
-                                    <a href="{{ route('settings.my-apps.list') }}" class="btn btn-warning btn-sm">
-                                        <i class="icon-arrow-left16 mr-1"></i> Back
+                                    <a href="{{ route('settings.my-apps.list') }}" class="btn btn-warning">
+                                        <i class="bx bx-arrow-back"></i> Back
                                     </a>
 
-                                    <button type="submit" class="btn btn-info btn-sm">
-                                        <i class="icon-database-check mr-1"></i> Save
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bx bx-save"></i> Save
                                     </button>
 
                                 </div>

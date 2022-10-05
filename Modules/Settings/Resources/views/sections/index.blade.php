@@ -53,26 +53,16 @@
                                             <td>{{ $item->parent->title ?? "" }}</td>
                                             <td>{{ $item->children->count() ?? 0 }}</td>
                                             <td>{{ $item->district->title ?? "" }}</td>
-                                            <td style="width: 150px">
-
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><i class="icon-cog5 mr-2"></i> Options</button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
+                                            <td style="width: 180px">
 
 
+                                                <a href="{{ route('settings.sections.edit', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="btn btn-warning btn-icon">
+                                                    <i class="tf-icons bx bx-pencil"></i>
+                                                </a>
 
-                                                        <a href="{{ route('settings.sections.edit', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="dropdown-item text-warning">
-                                                            <i class="icon-pencil7"></i> Edit
-                                                        </a>
-
-                                                        {!! Form::open(['method' => 'delete', 'route' => ['settings.sections.delete',\Illuminate\Support\Facades\Crypt::encrypt($item->id)], 'class' => 'dropdown-item delete', 'style' => 'display:inline']) !!}
-                                                        {!! Form::button('<i class="icon-trash text-danger" style=" margin-right: 12px;color:red;"></i> Delete', array('class'=>'btn btn-link ', 'type'=>'submit', 'style' => 'padding:0px; width:100%; text-align:left')) !!}
-                                                        {!! Form::close() !!}
-
-
-
-                                                    </div>
-                                                </div>
+                                                {!! Form::open(['method' => 'delete', 'route' => ['settings.sections.delete',\Illuminate\Support\Facades\Crypt::encrypt($item->id)], 'class' => 'dropdown-item delete', 'style' => 'display:inline; padding: 0px']) !!}
+                                                {!! Form::button('<i class="bx bx-trash tf-icons"></i>', array('class'=>'btn btn-danger btn-icon ', 'type'=>'submit')) !!}
+                                                {!! Form::close() !!}
 
 
 

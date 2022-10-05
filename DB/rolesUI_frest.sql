@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: rolesUI_frest
--- Generation Time: 2022-10-05 17:46:33.7400
+-- Generation Time: 2022-10-05 22:51:47.9960
 -- -------------------------------------------------------------
 
 
@@ -30,7 +30,7 @@ CREATE TABLE `apps` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 DROP TABLE IF EXISTS `companies`;
 CREATE TABLE `companies` (
@@ -183,7 +183,7 @@ CREATE TABLE `permission_role` (
   KEY `permission_role_role_id_index` (`role_id`),
   CONSTRAINT `permission_role_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `permission_role_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=160 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `permission_routes`;
 CREATE TABLE `permission_routes` (
@@ -212,7 +212,7 @@ CREATE TABLE `permission_user` (
   KEY `permission_user_user_id_index` (`user_id`),
   CONSTRAINT `permission_user_permission_id_foreign` FOREIGN KEY (`permission_id`) REFERENCES `permissions` (`id`) ON DELETE CASCADE,
   CONSTRAINT `permission_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `permissions`;
 CREATE TABLE `permissions` (
@@ -273,7 +273,7 @@ CREATE TABLE `role_user` (
   KEY `role_user_user_id_index` (`user_id`),
   CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE,
   CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=304 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=305 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `roles`;
 CREATE TABLE `roles` (
@@ -287,7 +287,7 @@ CREATE TABLE `roles` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `roles_slug_unique` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 DROP TABLE IF EXISTS `sections`;
 CREATE TABLE `sections` (
@@ -338,7 +338,8 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=291 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO `apps` (`id`, `title`, `description`, `icon`, `route`, `active`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Settings', '', 'bx bx-wrench', 'settings', 1, '2022-05-16 17:16:02', '2022-05-28 15:00:05', NULL);
+(1, 'Settings', NULL, 'bx bx-wrench', 'settings', 1, '2022-05-16 17:16:02', '2022-10-05 22:23:28', NULL),
+(10, 'testing app', NULL, 'bx bx-trash', 'testing', NULL, '2022-10-05 20:58:05', '2022-10-05 20:58:05', NULL);
 
 INSERT INTO `companies` (`id`, `company_type_id`, `company_level_id`, `parent_id`, `country_id`, `province_id`, `division_id`, `district_id`, `tehsil_id`, `title`, `description`, `user_id`, `created_at`, `updated_at`, `deleted_at`, `reference_id`, `reference_model`) VALUES
 (1, 1, 1, NULL, NULL, 1, NULL, NULL, NULL, 'Developers Department', 'Department for developer accounts', 2, '2022-05-28 18:05:10', '2022-06-23 10:00:33', NULL, NULL, NULL);
@@ -709,7 +710,8 @@ INSERT INTO `role_user` (`id`, `role_id`, `user_id`, `created_at`, `updated_at`,
 (13, 4, 2, '2022-05-26 06:45:29', '2022-05-26 06:45:29', NULL);
 
 INSERT INTO `roles` (`id`, `name`, `slug`, `description`, `level`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 'Developer', 'developer', 'Developer role for system settings', 1, '2022-05-13 07:15:04', '2022-05-28 12:59:16', NULL);
+(4, 'Developer', 'developer', 'Developer role for system settings', 1, '2022-05-13 07:15:04', '2022-05-28 12:59:16', NULL),
+(21, 'testing role', 'testing.role', NULL, 2, '2022-10-05 21:55:42', '2022-10-05 21:55:42', NULL);
 
 INSERT INTO `sections` (`id`, `parent_id`, `company_id`, `title`, `description`, `user_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
 (1, NULL, 1, 'Developers Unit', NULL, 2, '2022-05-28 13:08:29', '2022-05-28 13:08:29', NULL);

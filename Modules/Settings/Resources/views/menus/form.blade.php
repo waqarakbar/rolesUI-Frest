@@ -58,7 +58,7 @@
 
                                                 <span
                                                     class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('app_id') !!} @endif</span>
-                                                {!! Form::select('app_id', [null=>'Select a App']+$apps->toArray(), NULL, ['class' => 'form-control', 'id' => 'app_id']) !!}
+                                                {!! Form::select('app_id', [null=>'Select a App']+$apps->toArray(), NULL, ['class' => 'form-select select2', 'id' => 'app_id']) !!}
                                             </div>
                                         </div>
 
@@ -68,7 +68,7 @@
 
                                                 <span
                                                     class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('parent_id') !!} @endif</span>
-                                                {!! Form::select('parent_id', [null=>'This is parent']+$menus_parents->toArray(), NULL, ['class' => 'form-control', 'id' => 'parent_id']) !!}
+                                                {!! Form::select('parent_id', [null=>'This is parent']+$menus_parents->toArray(), NULL, ['class' => 'form-select select2', 'id' => 'parent_id']) !!}
                                             </div>
                                         </div>
 
@@ -105,12 +105,12 @@
                             <div class="row">
                                 <div class="col-12">
 
-                                    <a href="{{ route('settings.menus.list') }}" class="btn btn-warning btn-sm">
-                                        <i class="icon-arrow-left16 mr-1"></i> Back
+                                    <a href="{{ route('settings.menus.list') }}" class="btn btn-warning">
+                                        <i class="bx bx-arrow-back"></i> Back
                                     </a>
 
-                                    <button type="submit" class="btn btn-info btn-sm">
-                                        <i class="icon-database-check mr-1"></i> Save
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bx bx-save"></i> Save
                                     </button>
 
                                 </div>

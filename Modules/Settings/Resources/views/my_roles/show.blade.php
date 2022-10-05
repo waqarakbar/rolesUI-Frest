@@ -3,12 +3,8 @@
 
 @push('scripts')
 
-    <script type="text/javascript" src="{!! asset('assets/js/plugins/extensions/jquery_ui/core.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('assets/js/plugins/extensions/jquery_ui/effects.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('assets/js/plugins/extensions/jquery_ui/interactions.min.js') !!}"></script>
-
-    <script type="text/javascript" src="{!! asset('assets/js/plugins/trees/fancytree_all.min.js') !!}"></script>
-    <script type="text/javascript" src="{!! asset('assets/js/plugins/trees/fancytree_childcounter.js') !!}"></script>
+    <link href="{{ asset('assets/vendor/libs/fancytree/skin-win8/ui.fancytree.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('assets/vendor/libs/fancytree/jquery.fancytree-all-deps.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -17,7 +13,7 @@
                 checkbox: true,
                 selectMode: 3,
                 select: function (event, data) {
-
+                    console.log(data)
                 }
             });
 
@@ -130,7 +126,7 @@
         <input type="hidden" value="{{ implode(',', $assigned_perms_ids) }}" id="assigned_permissions" name="assigned_permissions">
 
         @foreach($trees as $tree)
-        <div class="col-6">
+        <div class="col-6 mt-4">
             <div class="card">
                 <div class="card-header header-elements-inline">
                     <h6 class="card-title"><strong><i class="{{ $tree->icon }} mr-1"></i>{{ $tree->title }} App</strong></h6>
@@ -139,12 +135,12 @@
                     </div>
                 </div>
 
-                <div class="card-body" style="max-height: 400px !important; overflow-y: auto;">
+                <div class="card-body" style="max-height: 400px !important; min-height: 400px !important; overflow-y: auto;">
 
 
 
 
-                    <div class="tree-checkbox-hierarchical well">
+                    <div class="tree-checkbox-hierarchical">
 
                         <ul>
 
@@ -176,19 +172,19 @@
 
 
 
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-12">
             <div class="card">
                 <div class="card-body">
 
 
                     <div class="col-12">
-                        <a href="{{ route('settings.my-roles.list') }}" class="btn btn-warning btn-sm">
-                            <i class="icon-arrow-left16 mr-1"></i> Back to Roles
+                        <a href="{{ route('settings.my-roles.list') }}" class="btn btn-warning">
+                            <i class="bx bx-arrow-back"></i> Back to Roles
                         </a>
 
-                        <button type="submit" class="btn btn-info btn-sm">
-                            <i class="icon-database-check mr-1"></i> Save Permissions
+                        <button type="submit" class="btn btn-success">
+                            <i class="bx bx-save"></i> Save Permissions
                         </button>
                     </div>
 

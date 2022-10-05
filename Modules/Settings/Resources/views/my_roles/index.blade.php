@@ -49,31 +49,23 @@
                                             <td><strong>{{ $item->name }}</strong></td>
                                             <td><code>{{ $item->slug }}/</code></td>
                                             <td><code>{{ $item->level }}/</code></td>
-                                            <td style="width: 150px">
-
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><i class="icon-cog5 mr-2"></i> Options</button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
+                                            <td style="width: 205px">
 
 
-
-                                                        <a href="{{ route('settings.my-roles.edit', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="dropdown-item text-warning">
-                                                            <i class="icon-pencil7"></i> Edit
-                                                        </a>
-
-
-                                                        <a href="{{ route('settings.my-roles.show', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="dropdown-item text-primary">
-                                                            <i class="icon-cog6"></i> Permissions
-                                                        </a>
-
-                                                        {!! Form::open(['method' => 'delete', 'route' => ['settings.my-roles.delete',\Illuminate\Support\Facades\Crypt::encrypt($item->id)], 'class' => 'dropdown-item delete', 'style' => 'display:inline-block']) !!}
-                                                        {!! Form::button('<i class="icon-trash text-danger" style=" margin-right: 12px;color:red;"></i> Delete', array('class'=>'btn btn-link ', 'type'=>'submit', 'style' => 'padding:0px; width:100%; text-align:left')) !!}
-                                                        {!! Form::close() !!}
+                                                <a href="{{ route('settings.my-roles.edit', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="btn btn-warning btn-icon">
+                                                    <i class="tf-icons bx bx-pencil"></i>
+                                                </a>
 
 
 
-                                                    </div>
-                                                </div>
+                                                <a href="{{ route('settings.my-roles.show', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="btn btn-primary btn-icon">
+                                                    <i class="bx bx-wrench"></i>
+                                                </a>
+
+
+                                                {!! Form::open(['method' => 'delete', 'route' => ['settings.my-roles.delete',\Illuminate\Support\Facades\Crypt::encrypt($item->id)], 'class' => 'dropdown-item delete', 'style' => 'display:inline; padding: 0px']) !!}
+                                                {!! Form::button('<i class="bx bx-trash tf-icons"></i>', array('class'=>'btn btn-danger btn-icon ', 'type'=>'submit')) !!}
+                                                {!! Form::close() !!}
 
 
 

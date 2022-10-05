@@ -1,6 +1,13 @@
 @extends('layouts.'.config('settings.active_layout'))
 @php $app_id = config('settings.app_id') @endphp
 
+@push('stylesheets')
+    <style>
+        .table > :not(caption) > * > * {
+            padding: 5px;
+        }
+    </style>
+@endpush
 @section('content')
 
     <div class="row">
@@ -34,8 +41,7 @@
 
                                     <thead>
                                     <tr>
-                                        {{--<th>#</th>--}}
-                                        <th>Action</th>
+                                        <th>#</th>
                                         <th>Name</th>
                                         <th>Email</th>
                                         <th>Username</th>
@@ -45,43 +51,14 @@
                                         <th>{{ config('settings.section_title') }}</th>
                                         <th>Roles</th>
                                         <th>No. of Permissions</th>
+                                        <th>Action</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
                                     @foreach($items as $item)
                                         <tr>
-                                            {{--<td>{{ $loop->iteration }}</td>--}}
-                                            <td style="width: 150px">
-
-                                                <div class="btn-group">
-                                                    <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown"><i class="icon-cog5 mr-2"></i> Options</button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-
-
-
-                                                        <a href="{{ route('settings.users-mgt.edit', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="dropdown-item text-warning">
-                                                            <i class="icon-pencil7"></i> Edit
-                                                        </a>
-
-
-                                                        <a href="{{ route('settings.users-mgt.show', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="dropdown-item text-primary">
-                                                            <i class="icon-cog6"></i> Permissions
-                                                        </a>
-
-                                                        {!! Form::open(['method' => 'delete', 'route' => ['settings.users-mgt.delete',\Illuminate\Support\Facades\Crypt::encrypt($item->id)], 'class' => 'dropdown-item delete', 'style' => 'display:inline-block']) !!}
-                                                        {!! Form::button('<i class="icon-trash text-danger" style=" margin-right: 12px;color:red;"></i> Delete', array('class'=>'btn btn-link ', 'type'=>'submit', 'style' => 'padding:0px; width:100%; text-align:left')) !!}
-                                                        {!! Form::close() !!}
-
-
-
-                                                    </div>
-                                                </div>
-
-
-
-
-                                            </td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td><strong>{{ $item->name }}</strong></td>
                                             <td>{{ $item->email }}</td>
                                             <td><code>{{ $item->username }}</code></td>
@@ -93,6 +70,31 @@
                                                 @foreach($item->roles as $r) <span class="badge badge-info">{{ $r->name }}</span> @endforeach
                                             </td>
                                             <td>{{ $item->permissions->count() }}</td>
+
+                                            <td style="width: 180px">
+
+
+
+                                                <a href="{{ route('settings.users-mgt.edit', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="btn btn-warning btn-icon">
+                                                    <i class="tf-icons bx bx-pencil"></i>
+                                                </a>
+
+
+                                                <a href="{{ route('settings.users-mgt.show', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" class="btn btn-primary btn-icon">
+                                                    <i class="tf-icons bx bx-wrench"></i>
+                                                </a>
+
+                                                {!! Form::open(['method' => 'delete', 'route' => ['settings.users-mgt.delete',\Illuminate\Support\Facades\Crypt::encrypt($item->id)], 'class' => 'dropdown-item delete', 'style' => 'display:inline; padding: 0px']) !!}
+                                                {!! Form::button('<i class="bx bx-trash tf-icons"></i>', array('class'=>'btn btn-danger btn-icon ', 'type'=>'submit')) !!}
+                                                {!! Form::close() !!}
+
+
+
+
+
+
+
+                                            </td>
 
                                         </tr>
                                     @endforeach

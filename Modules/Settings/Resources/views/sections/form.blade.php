@@ -131,7 +131,7 @@
 
                                         <span
                                             class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('company_id') !!} @endif</span>
-                                        {!! Form::select('company_id', [null=>'Select a '.config('settings.company_title')]+$companies_dd, NULL, ['class' => 'form-control', 'id' => 'company_id', 'required' => 'required']) !!}
+                                        {!! Form::select('company_id', [null=>'Select a '.config('settings.company_title')]+$companies_dd, NULL, ['class' => 'form-select select2', 'id' => 'company_id', 'required' => 'required']) !!}
                                     </div>
                                 </div>
 
@@ -141,34 +141,11 @@
 
                                         <span
                                             class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('parent_id') !!} @endif</span>
-                                        {!! Form::select('parent_id', [null=>'This is Parent '.config('settings.section_title')], NULL, ['class' => 'form-control', 'id' => 'parent_id']) !!}
+                                        {!! Form::select('parent_id', [null=>'This is Parent '.config('settings.section_title')], NULL, ['class' => 'form-select select2', 'id' => 'parent_id']) !!}
                                     </div>
                                 </div>
                             </div>
 
-
-
-                            {{--<div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        {!! Form::label('province_id', 'Select Province ', ['class' => 'control-label']) !!}
-
-                                        <span
-                                            class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('province_id') !!} @endif</span>
-                                        {!! Form::select('province_id', [null=>'Select a Province']+$provinces->toArray(), NULL, ['class' => 'form-control select2', 'id' => 'province_id']) !!}
-                                    </div>
-                                </div>
-
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        {!! Form::label('district_id', 'Select District ', ['class' => 'control-label']) !!}
-
-                                        <span
-                                            class="help">@if(Session::has('errors')) {!! Session::get('errors')->first('district_id') !!} @endif</span>
-                                        {!! Form::select('district_id', [null=>'Select a District']+$districts->toArray(), NULL, ['class' => 'form-control select2', 'id' => 'district_id']) !!}
-                                    </div>
-                                </div>
-                            </div>--}}
 
 
 
@@ -188,12 +165,12 @@
                             <div class="row">
                                 <div class="col-12">
 
-                                    <a href="{{ route('settings.sections.list') }}" class="btn btn-warning btn-sm">
-                                        <i class="icon-arrow-left16 mr-1"></i> Back
+                                    <a href="{{ route('settings.sections.list') }}" class="btn btn-warning">
+                                        <i class="bx bx-arrow-back"></i> Back
                                     </a>
 
-                                    <button type="submit" class="btn btn-info btn-sm">
-                                        <i class="icon-database-check mr-1"></i> Save
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="bx bx-save"></i> Save
                                     </button>
 
                                 </div>
