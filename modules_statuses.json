@@ -2,5 +2,6 @@
     "Settings": true,
     "SupplyChain": true,
     "IncidentReporting": true,
-    "TaskManagement": true
+    "TaskManagement": true,
+    "EIdentity": true
 }
