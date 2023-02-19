@@ -11,13 +11,9 @@
                 <div class="card-header header-elements-inline">
                     <h6 class="card-title">{{ $title }}</h6>
                     <div class="header-elements">
-                        <div class="form-check form-check-right form-check-switchery form-check-switchery-sm">
-
-                            {{--<label class="form-check-label">
-                                Live update:
-                                <input type="checkbox" class="form-input-switchery" checked data-fouc>
-                            </label>--}}
-                        </div>
+                    </div>
+                    <div class="text-right" style="text-align: right">
+                        <a href="{{route('eidentity.employee.create')}}" class="btn btn-primary btn-light btn-sm" >Create New Employee</a>
                     </div>
                 </div>
 
@@ -39,6 +35,7 @@
                                         <th>Father Name</th>
                                         <th>CNIC</th>
                                         <th>Mobile</th>
+                                        <th>Picture</th>
                                         <th>Actions</th>
                                     </tr>
                                     </thead>
@@ -51,6 +48,15 @@
                                             <td>{{ $item->father_name }}</td>
                                             <td>{{ $item->cnic }}</td>
                                             <td>{{ $item->mobile_no }}</td>
+                                            <td>
+                                                @if(!checkNullAndEmpty($item->profile_picture))
+                                                    <a href="{{asset("storage/eidentity/$item->profile_picture")}}" target="_blank">
+                                                        <img width="50" src="{{asset("storage/eidentity/$item->profile_picture")}}">
+                                                    </a>
+                                                @else
+                                                    -
+                                                @endif
+                                            </td>
                                             <td style="width: 180px">
                                                 <a href="{{ route('eidentity.employee.edit', ['id' => encrypt($item->id)]) }}" class="btn btn-warning btn-icon">
                                                     <i class="tf-icons bx bx-pencil"></i>

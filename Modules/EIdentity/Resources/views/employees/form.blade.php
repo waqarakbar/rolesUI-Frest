@@ -78,7 +78,10 @@
                                 <div class="col-sm-3 col-md-3 col-lg-3 ">
                                     <div class="form-group">
                                         {!! Form::label('profile_picture', 'Profile Picture', ['class' => 'form-label req']) !!}
-                                        {!! Form::file('profile_picture', null, ['class' => 'form-control', 'id' => 'profile_picture', 'required' => 'required']) !!}
+                                        {!! Form::file('profile_picture', null,
+                                        ['class' => 'form-control', 'id' => 'profile_picture',
+                                        "accept"=>"image/png, image/bmp, image/jpeg, image/tiff, image/jpg"
+                                        ]) !!}
                                         <span class="help">@if(session()->has('errors')) {!! session('errors')->first('profile_picture') !!}@endif</span>
                                     </div>
                                 </div>
