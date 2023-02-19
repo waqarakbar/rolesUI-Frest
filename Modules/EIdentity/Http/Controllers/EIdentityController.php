@@ -13,6 +13,7 @@ use Modules\EIdentity\Entities\Designations;
 use Modules\EIdentity\Entities\EmployeeCategory;
 use Modules\EIdentity\Entities\Employees;
 use Modules\EIdentity\Entities\GuzzetedStatus;
+use Modules\Settings\Entities\Company;
 use Modules\Settings\Entities\MyApp;
 
 class EIdentityController extends Controller
@@ -23,8 +24,23 @@ class EIdentityController extends Controller
      */
     public function index()
     {
-        echo "dashboard";
-        return view('eidentity::index');
+        $total_employees =Employees::where(['user_id'=>Auth::id()])->count();
+        $total_pending =Employees::where(['user_id'=>Auth::id()])
+            ->whereNull('profile_picture')
+            ->whereNull('mobile_no')
+                ->count();
+        $total_update =Employees::where(['user_id'=>Auth::id()])
+            ->whereNotNull('profile_picture')
+            ->whereNotNull('mobile_no')
+                ->count();
+
+        $data = [
+            'title'=>'Dashboard',
+            'total_employees'=>$total_employees,
+            'total_pending'=>$total_pending,
+            'total_update'=>$total_update
+        ];
+        return view('eidentity::index',$data);
     }
 
     public function list()

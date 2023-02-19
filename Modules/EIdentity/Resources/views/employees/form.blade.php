@@ -1,13 +1,8 @@
-@extends('layouts.'.config('settings.active_layout'))
-@php $app_id = config('settings.app_id') @endphp
-
-
+@extends('layouts.'.config('eidentity.active_layout'))
+@php $app_id = config('eidentity.app_id') @endphp
 @section('content')
-
-
     <div class="row">
         <div class="col-12">
-
             <!-- Traffic sources -->
             <div class="card">
                 <div class="card-header header-elements-inline">

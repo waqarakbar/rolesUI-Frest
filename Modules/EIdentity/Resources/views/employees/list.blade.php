@@ -1,11 +1,8 @@
-@extends('layouts.'.config('settings.active_layout'))
+@extends('layouts.'.config('eidentity.active_layout'))
 @php $app_id = config('eidentity.app_id') @endphp
-
 @section('content')
-
     <div class="row">
         <div class="col-12">
-
             <!-- Traffic sources -->
             <div class="card">
                 <div class="card-header header-elements-inline">
@@ -16,7 +13,6 @@
                         <a href="{{route('eidentity.employee.create')}}" class="btn btn-primary btn-light btn-sm" >Create New Employee</a>
                     </div>
                 </div>
-
                 <div class="card-body">
 
                     <div class="row">
@@ -79,12 +75,8 @@
                     </div>
 
                 </div>
-
-
             </div>
             <!-- /traffic sources -->
-
         </div>
     </div>
-
 @endsection
