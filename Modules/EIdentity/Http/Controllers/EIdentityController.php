@@ -5,7 +5,14 @@ namespace Modules\EIdentity\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Crypt;
+use Modules\EIdentity\Entities\BPS;
+use Modules\EIdentity\Entities\Departments;
+use Modules\EIdentity\Entities\Designations;
+use Modules\EIdentity\Entities\EmployeeCategory;
 use Modules\EIdentity\Entities\Employees;
+use Modules\EIdentity\Entities\GuzzetedStatus;
+use Modules\Settings\Entities\MyApp;
 
 class EIdentityController extends Controller
 {
@@ -66,7 +73,31 @@ class EIdentityController extends Controller
      */
     public function edit($id)
     {
-        return view('eidentity::edit');
+
+        $item               = Employees::with(['bps','employeeCategory','designation','guzzetedStatus'])
+                             ->find(Crypt::decrypt($id));
+
+        $bps_dd             = BPS::pluck('title','id');
+        $employee_category  = EmployeeCategory::pluck('title','id');
+        $designations       = Designations::pluck('title','id');
+        $departments        = Departments::pluck('title','id');
+        $guzzeted_status    = GuzzetedStatus::pluck('title','id');
+
+//print_r($item);
+        $data = [
+            'title' => 'Update Employee',
+            'back_route' => ['eidentity.employee.list', 'Apps List'],
+            'new_route' => ['eidentity.employee.create', 'New Employee'],
+            'item' => $item,
+            'bps_dd'=>$bps_dd,
+            'employee_category'=>$employee_category,
+            'designations'=>$designations,
+            'departments'=>$departments,
+            'guzzeted_status'=>$guzzeted_status,
+        ];
+
+
+        return view('eidentity::employees.form',$data);
     }
 
     /**
@@ -77,7 +108,57 @@ class EIdentityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'department_id'=>"required|integer",
+            'personnel_no'=>'required',
+            'employee_name'=>"required|alpha_spaces|min:2|max:32",
+            'father_name'=>"required|alpha_spaces|min:2|max:32",
+            'mobile_no'=>"required|min:10|max:14",
+            'bps_id'=>"required|integer",
+            'employee_category_id'=>"required|integer",
+            'guzzeted_id'=>"required|integer",
+            'designation_id'=>"required|integer",
+            'cnic'=>"required|integer",
+            'dob'=>"required|date",
+            'date_of_appointment'=>"required|date"
+        ],[
+            'alpha_spaces'=>'only alpha charters(a-z A-Z) with space are acceptable'
+        ]);
+
+        $item     = Employees::with(['bps','employeeCategory','designation'])->find(Crypt::decrypt($id));
+        $fill_rec = $item->fill($request->all());
+
+        //profile picture upload
+        if($request->hasFile('profile_picture')){
+
+            // Get filename with the extension
+            $filenameWithExt = $request->file('profile_picture')->getClientOriginalName();
+            //Get just filename
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            // Get just ext
+            $extension = $request->file('profile_picture')->getClientOriginalExtension();
+            // Filename to store
+            $fileNameToStore = unique_name().'.'.strtolower($extension);
+            // Upload Image
+            $path = $request->file('profile_picture')->storeAs('public/eidentity',$fileNameToStore);
+
+            \request()->request->set('profile_picture',$fileNameToStore);
+
+            $fill_rec->profile_picture = $fileNameToStore;
+        }
+
+
+        //save record
+        $update   =$fill_rec->save();
+
+        if($update){
+            session()->flash('success','Employee record updated successfully!');
+            return to_route('eidentity.employee.list');
+        }
+
+        session()->flash('error','Employee record not, Please check again!');
+        return to_route('eidentity.employee.list');
+
     }
 
     /**
