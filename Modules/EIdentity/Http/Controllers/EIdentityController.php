@@ -87,6 +87,17 @@ class EIdentityController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $id         = decrypt($id);
+        $employee   = Employees::find($id);
+
+        if($employee->delete()){
+            session()->flash('success', 'Employee deleted successfully');
+            return redirect()->back();
+        }
+
+
+        session()->flash('error', 'Something went wrong, please try later');
+        return redirect()->back();
+
     }
 }
