@@ -103,7 +103,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
+                <a href="{{route('home')}}" class="app-brand-link">
                     <span class="app-brand-text demo menu-text fw-bold ms-2">{{ env('APP_ABBR') }}</span>
                 </a>
 
@@ -357,7 +357,7 @@
                             <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                               <i class="bx bx-pie-chart-alt-2 fs-4"></i>
                             </span>
-                                                <a href="index.html" class="stretched-link">Dashboard</a>
+                                                <a href="{{route('home')}}" class="stretched-link">Dashboard</a>
                                                 <small class="text-muted mb-0">User Profile</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
