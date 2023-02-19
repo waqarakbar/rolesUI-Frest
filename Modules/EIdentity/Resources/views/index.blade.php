@@ -27,7 +27,10 @@
                                         </span>
                                     </div>
                                     <span class="d-block text-nowrap">Total Employees</span>
-                                    <h2 class="mb-0">{{$total_employees}}</h2>
+                                    <h2 class="mb-0">
+                                        <a href="{{route('eidentity.employee.list')}}">{{$total_employees}}</a>
+
+                                    </h2>
                                 </div>
                             </div>
                         </div>

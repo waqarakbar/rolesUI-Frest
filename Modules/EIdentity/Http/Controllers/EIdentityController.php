@@ -66,7 +66,7 @@ class EIdentityController extends Controller
         $bps_dd             = BPS::pluck('title','id');
         $employee_category  = EmployeeCategory::pluck('title','id');
         $designations       = Designations::pluck('title','id');
-        $departments        = Departments::pluck('title','id');
+        $departments        = Company::whereNot('id',1)->orderBy('title','ASC')->pluck('title','id');
         $guzzeted_status    = GuzzetedStatus::pluck('title','id');
 
 //print_r($item);
@@ -173,7 +173,7 @@ class EIdentityController extends Controller
         $bps_dd             = BPS::pluck('title','id');
         $employee_category  = EmployeeCategory::pluck('title','id');
         $designations       = Designations::pluck('title','id');
-        $departments        = Departments::pluck('title','id');
+        $departments        = Company::whereNot('id',1)->orderBy('title','ASC')->pluck('title','id');
         $guzzeted_status    = GuzzetedStatus::pluck('title','id');
 
 //print_r($item);
