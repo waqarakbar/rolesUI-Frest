@@ -5,6 +5,7 @@ namespace Modules\EIdentity\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\EIdentity\Entities\Employees;
 
 class EIdentityController extends Controller
 {
@@ -14,7 +15,19 @@ class EIdentityController extends Controller
      */
     public function index()
     {
+        echo "dashboard";
         return view('eidentity::index');
+    }
+
+    public function list()
+    {
+        $data = [
+            'title' => 'Employees  List',
+            'new_route' => ['eidentity.employee.create', 'New Employee'],
+            'employees' => Employees::limit(100)->get()
+        ];
+
+        return view('eidentity::employees.list',$data);
     }
 
     /**
