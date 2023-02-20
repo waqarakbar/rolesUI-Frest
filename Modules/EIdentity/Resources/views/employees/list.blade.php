@@ -1,5 +1,12 @@
 @extends('layouts.'.config('eidentity.active_layout'))
 @php $app_id = config('eidentity.app_id') @endphp
+<style>
+    @media only screen and (max-width: 1400px) {
+        html {
+            zoom:75%
+        }
+    }
+</style>
 @section('content')
     <div class="row">
         <div class="col-12">

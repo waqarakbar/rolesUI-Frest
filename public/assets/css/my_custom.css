@@ -25,9 +25,3 @@
 .bg-green-new{
     background: #06AA91 !important;
 }
-
-@media only screen and (max-width: 1400px) {
-    html {
-        zoom:75%
-    }
-}
