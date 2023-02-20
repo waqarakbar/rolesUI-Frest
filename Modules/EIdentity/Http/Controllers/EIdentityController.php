@@ -45,10 +45,18 @@ class EIdentityController extends Controller
 
     public function list()
     {
+        $employees = Employees::with(['bps','designation'])
+                    ->where(['user_id'=>Auth::id()])
+                    ->orderByDesc('bps_id')
+                    ->get();
+
+//        pr($employees->toArray());
+//        return "";
+
         $data = [
             'title' => 'Employees  List',
             'new_route' => ['eidentity.employee.create', 'New Employee'],
-            'employees' => Employees::where(['user_id'=>Auth::id()])->get()
+            'employees' => $employees
         ];
 
         return view('eidentity::employees.list',$data);
