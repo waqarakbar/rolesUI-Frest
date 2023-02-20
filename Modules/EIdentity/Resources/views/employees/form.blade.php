@@ -151,6 +151,31 @@
 
                             </div>
 
+                            <br>
+                            <h6 class="fw-bold">3. Reporting Line</h6>
+                            <div class="row g3">
+
+                                <div class="col-sm-12 col-md-6 col-lg-6 ">
+                                    <div class="form-group">
+                                        {!! Form::label('name_of_working_section', 'Name of the Section Currenrly Working ', ['class' => 'form-label req']) !!}
+                                        {!! Form::text('name_of_working_section', null, ['class' => 'form-control', 'id' => 'name_of_working_section']) !!}
+                                        <span class="help">
+                                            Name of the section in which employee is working. For example, Litigation, Budget & Accounts
+                                        </span>
+                                        <span class="help">@if(session()->has('errors')) {!! session('errors')->first('name_of_working_section') !!}@endif</span>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-6 col-lg-6 ">
+                                    <div class="form-group">
+                                        {!! Form::label('reporting_to_designation_id', 'Reporting to ', ['class' => 'form-label req']) !!}
+                                        <span class="help">@if(session()->has('errors')) {!! session('errors')->first('reporting_to_designation_id') !!}@endif</span>
+                                        {!! Form::select('reporting_to_designation_id', $designations,null, ['class' => 'form-control select2', 'id' => 'reporting_to_designation_id']) !!}
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row">
                                 <div class="col-12">
                                     <a href="{{ route('eidentity.employee.list') }}" class="btn btn-warning">
