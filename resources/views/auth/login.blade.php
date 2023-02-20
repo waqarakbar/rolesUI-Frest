@@ -72,25 +72,21 @@
                     <!-- Logo -->
                     <div class="app-brand justify-content-center">
                         <a href="/" class="app-brand-link gap-2">
-                            <span class="app-brand-text demo h3 mb-0 fw-bold">RolesUI</span>
+                            <span class="app-brand-text demo h3 mb-0 fw-bold">
+                                <img src="{{asset('assets/site-images/logo.jpeg')}}" width="230">
+                            </span>
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Welcome to RolesUI! 👋</h4>
-                    <p class="mb-4">Please sign-in to your account and start the adventure</p>
-
-
-                    @if(\Illuminate\Support\Facades\Session::has('error'))
+                    @if(session()->has('error'))
                         <div class="alert alert-danger">
-                            {{ \Illuminate\Support\Facades\Session::get('error') }}
+                            {{ session()->get('error') }}
                         </div>
                     @endif
 
 
                     <form id="formAuthentication" class="mb-3" action="{{ route('custom-authenticate') }}" method="POST">
-
                         @csrf
-
                         <div class="mb-3">
                             <label for="email" class="form-label">Username</label>
                             <input
