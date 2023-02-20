@@ -16,12 +16,9 @@
     />
 
     <title>{{ env('APP_NAME') }}</title>
-
     <meta name="description" content=""/>
-
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}"/>
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -50,6 +47,8 @@
     <!-- Page CSS -->
     <!-- Page -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/pages/page-auth.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/my_custom.css') }}"/>
+
     <!-- Helpers -->
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
 
@@ -63,7 +62,7 @@
 <body>
 <!-- Content -->
 
-<div class="container-xxl">
+<div class="container-xxl bottom-border-line">
     <div class="authentication-wrapper authentication-basic container-p-y">
         <div class="authentication-inner py-4">
             <!-- Register -->
@@ -73,7 +72,7 @@
                     <div class="app-brand justify-content-center">
                         <a href="/" class="app-brand-link gap-2">
                             <span class="app-brand-text demo h3 mb-0 fw-bold">
-                                <img src="{{asset('assets/site-images/logo.jpeg')}}" width="230">
+                                <img src="{{asset('assets/site-images/logo.png')}}" width="230">
                             </span>
                         </a>
                     </div>
@@ -127,10 +126,8 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                            <button class="btn btn-primary d-grid w-100 bg-green-new" type="submit">Sign in</button>
                         </div>
-
-
                     </form>
 
 
@@ -161,13 +158,24 @@
 
 
                 </div>
-
-                <div class="card-footer text-center">
-                    <img src="{{asset('assets/site-images/logo-bottom.png')}}" width="300"/>
-                </div>
             </div>
             <!-- /Register -->
+
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme mt-5">
+                <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
+                    <div class="mb-2 mb-md-0">
+                        <h3 class="text-center an-initiative-on">An Initiative of</h3>
+                        <img src="{{asset('assets/site-images/logo-bottom.png')}}" width="300"/>
+                    </div>
+
+                </div>
+            </footer>
+            <!-- / Footer -->
+
         </div>
+
+
     </div>
 </div>
 

@@ -71,8 +71,9 @@
             <div class="container-xxl">
                 <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
                     <a href="/" class="app-brand-link gap-2">
-
-                        <span class="app-brand-text demo menu-text fw-bold">{{ env('APP_ABBR') }}</span>
+                        <span class="app-brand-text demo menu-text fw-bold">
+                            <img src="{{asset('assets/site-images/logo.png')}}" width="150">
+                        </span>
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
@@ -121,6 +122,7 @@
                         <!--/ Language -->
 
                         <!-- Search -->
+                        {{--
                         <li class="nav-item navbar-search-wrapper me-2 me-xl-0">
                             <a class="nav-item nav-link search-toggler" href="javascript:void(0);">
                                 <i class="bx bx-search bx-sm"></i>
@@ -481,6 +483,7 @@
                             </ul>
                         </li>
                         <!--/ Notification -->
+                        --}}
 
                         <!-- User -->
                         <li class="nav-item navbar-dropdown dropdown-user dropdown">
@@ -492,7 +495,7 @@
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
-                                    <a class="dropdown-item" href="pages-account-settings-account.html">
+                                    <a class="dropdown-item" href="javascript:;">
                                         <div class="d-flex">
                                             <div class="flex-shrink-0 me-3">
                                                 <div class="avatar avatar-online">
@@ -501,12 +504,13 @@
                                                 </div>
                                             </div>
                                             <div class="flex-grow-1">
-                                                <span class="fw-semibold d-block lh-1">John Doe</span>
-                                                <small>Admin</small>
+                                                <span class="fw-semibold d-block lh-1">{{auth()->user()->name}}</span>
+{{--                                                <small>Admin</small>--}}
                                             </div>
                                         </div>
                                     </a>
                                 </li>
+                                {{--
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
@@ -527,7 +531,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
 
-
+                                --}}
                                 <li>
 
                                     {{--<a class="dropdown-item" href="auth-login-cover.html" target="_blank">
@@ -629,30 +633,19 @@
 
                                     </div>
                                 @endforeach
-
                             </div>
                             <!-- modules list -->
-
-
                         </div>
-
                     </div>
-
-
-
-
-
-
                 </div>
                 <!--/ Content -->
 
                 <!-- Footer -->
-                <footer class="content-footer footer bg-footer-theme">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <footer class="content-footer footer bg-footer-theme bottom-border-line">
+                    <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
                         <div class="mb-2 mb-md-0">
-                            © {{ date("Y") }}, made with ❤️ by
-                            <a href="#" target="_blank"
-                               class="footer-link fw-semibold">TECHIES</a>
+                            <h3 class="text-center an-initiative-on">An Initiative of</h3>
+                            <img src="{{asset('assets/site-images/logo-bottom.png')}}" width="300"/>
                         </div>
 
                     </div>
