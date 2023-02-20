@@ -171,7 +171,7 @@
                                     <div class="form-group">
                                         {!! Form::label('reporting_to_designation_id', 'Reporting to ', ['class' => 'form-label req']) !!}
                                         <span class="help">@if(session()->has('errors')) {!! session('errors')->first('reporting_to_designation_id') !!}@endif</span>
-                                        {!! Form::select('reporting_to_designation_id', $designations,null, ['class' => 'form-control select2', 'id' => 'reporting_to_designation_id']) !!}
+                                        {!! Form::select('reporting_to_designation_id', $designations,null, ['placeholder'=>'Select Designation', 'class' => 'form-control select2', 'id' => 'reporting_to_designation_id']) !!}
                                     </div>
                                 </div>
                             </div>
