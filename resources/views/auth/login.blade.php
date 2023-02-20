@@ -161,6 +161,10 @@
 
 
                 </div>
+
+                <div class="card-footer text-center">
+                    <img src="{{asset('assets/site-images/logo-bottom.png')}}" width="300"/>
+                </div>
             </div>
             <!-- /Register -->
         </div>
