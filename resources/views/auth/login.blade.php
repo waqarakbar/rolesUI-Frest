@@ -64,7 +64,7 @@
 
 <div class="container-xxl bottom-border-line">
     <div class="authentication-wrapper authentication-basic container-p-y">
-        <div class="authentication-inner py-4">
+        <div class="authentication-inner py-2">
             <!-- Register -->
             <div class="card">
                 <div class="card-body">
@@ -119,12 +119,12 @@
                         </div>
 
 
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="remember-me"/>
-                                <label class="form-check-label" for="remember-me"> Remember Me </label>
-                            </div>
-                        </div>
+{{--                        <div class="mb-3">--}}
+{{--                            <div class="form-check">--}}
+{{--                                <input class="form-check-input" type="checkbox" id="remember-me"/>--}}
+{{--                                <label class="form-check-label" for="remember-me"> Remember Me </label>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="mb-3">
                             <button class="btn btn-primary d-grid w-100 bg-green-new" type="submit">Sign in</button>
                         </div>
@@ -162,8 +162,8 @@
             <!-- /Register -->
 
             <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme mt-5">
-                <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
+            <footer class="content-footer footer bg-footer-theme mt-4">
+                <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column mb-2 mb-md-0">
                     <div class="mb-2 mb-md-0">
                         <h3 class="text-center an-initiative-on">An Initiative of</h3>
                         <img src="{{asset('assets/site-images/logo-bottom.png')}}" width="300"/>

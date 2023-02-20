@@ -48,7 +48,7 @@ class EIdentityController extends Controller
         $data = [
             'title' => 'Employees  List',
             'new_route' => ['eidentity.employee.create', 'New Employee'],
-            'employees' => Employees::limit(100)->get()
+            'employees' => Employees::where(['user_id'=>Auth::id()])->get()
         ];
 
         return view('eidentity::employees.list',$data);
