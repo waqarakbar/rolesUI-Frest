@@ -56,7 +56,7 @@
                                         </span>
                                     </div>
                                     <span class="d-block text-nowrap">Total Record Pending</span>
-                                    <h2 class="mb-0">{{$total_update}}</h2>
+                                    <h2 class="mb-0">{{$total_pending}}</h2>
                                 </div>
                             </div>
                         </div>
