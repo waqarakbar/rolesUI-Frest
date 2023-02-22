@@ -28,8 +28,7 @@
 
                             <div class="table-responsive" style="min-height: 200px">
 
-                                <table class="table table-striped" >
-
+                                <table class="table table-striped" id="datatable">
                                     <thead>
                                     <tr>
                                         <th>#</th>
@@ -66,3 +65,46 @@
         </div>
     </div>
 @endsection
+
+@push('stylesheets')
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css')}}" />
+    <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css')}}" />
+    {{--    <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css')}}" />--}}
+    {{--    <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css')}}" />--}}
+    {{--    <link rel="stylesheet" href="{{asset('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css')}}" />--}}
+
+@endpush
+
+@push('scripts')
+    {{--    <script src="{{asset('assets/vendor/libs/i18n/i18n.js')}}"></script>--}}
+    <script src="{{asset('assets/vendor/libs/datatables/jquery.dataTables.js')}}"></script>
+    <script src="{{asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js')}}"></script>
+    <script src="{{asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js')}}"></script>
+    <script src="{{asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js')}}"></script>
+    {{--    <script src="{{asset('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.js')}}"></script>--}}
+    {{--    <script src="{{asset('assets/vendor/libs/datatables-buttons/datatables-buttons.js')}}"></script>--}}
+    {{--    <script src="{{asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.js')}}"></script>--}}
+    {{--    <script src="{{asset('assets/vendor/libs/datatables-rowgroup/datatables.rowgroup.js')}}"></script>--}}
+    {{--    <script src="{{asset('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.js')}}"></script>--}}
+
+    <script>
+        $(document).ready(function (){
+            $("#datatable").DataTable({
+                responsive: false,
+                processing: false,
+                serverSide: false,
+                searching:  true,
+                "order": [],
+                //sorting:    false,
+                scrollX:    false,
+                lengthMenu: [
+                    [ 50, 100, 250, 500 , -1 ],
+                    [ '50', '100', '250','500' ,'All']
+                ],
+                "pageLength": 100,
+                pagingType: "full_numbers"
+            });
+
+        });
+    </script>
+@endpush

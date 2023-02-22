@@ -123,7 +123,7 @@ class EIdentityController extends Controller
         $fill_rec = $item->fill($request->all());
         $user = Auth::user();
         $user_id = $user->id;
-
+        $ipms_department_id = $user->company_id;
         //profile picture upload
         if($request->hasFile('profile_picture')){
 
