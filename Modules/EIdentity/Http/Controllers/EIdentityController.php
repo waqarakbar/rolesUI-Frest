@@ -283,4 +283,29 @@ class EIdentityController extends Controller
         return redirect()->back();
 
     }
+
+    public function departmentWiseReport(Request $request){
+
+        $departments = Company::query()
+            ->where('id','>',1)
+            ->withCount([
+                'employees',
+                'employees as pending_mobile'=>function($q){
+                    $q->whereNull('mobile_no');
+                },
+                'employees as pending_profile_pic'=>function($q){
+                    $q->whereNull('profile_picture');
+                }
+            ])->get();
+
+        //pr($departments->toArray(),true);
+        $data = [
+            'title'=>'Department Wise Report',
+            'departments'=>$departments,
+
+        ];
+
+        return view('eidentity::reports.department-wise',$data);
+
+    }
 }

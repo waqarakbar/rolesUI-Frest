@@ -23,5 +23,11 @@ Route::prefix('eidentity')->middleware(['auth'])->group(function() {
         Route::put('/edit{id}', 'EIdentityController@update')->name('eidentity.employee.update');
 
         Route::delete('/delete/{id}', 'EIdentityController@destroy')->name('eidentity.employee.delete');
+
+        Route::prefix('reports')->group(function (){
+            Route::get('/department-wise', 'EIdentityController@departmentWiseReport')->name('eidentity.employee.report-departmentwise');
+        });
+
     });
+
 });
