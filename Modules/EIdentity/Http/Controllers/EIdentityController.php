@@ -27,7 +27,7 @@ class EIdentityController extends Controller
         $total_employees =Employees::where(['user_id'=>Auth::id()])->count();
         $total_pending =Employees::where(['user_id'=>Auth::id()])
             ->whereNull('profile_picture')
-            ->whereNull('mobile_no')
+            ->orWhereNull('mobile_no')
                 ->count();
         $total_update =Employees::where(['user_id'=>Auth::id()])
             ->whereNotNull('profile_picture')
