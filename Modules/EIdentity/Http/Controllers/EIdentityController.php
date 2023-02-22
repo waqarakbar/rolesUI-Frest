@@ -24,15 +24,15 @@ class EIdentityController extends Controller
      */
     public function index()
     {
-        $total_employees =Employees::where(['user_id'=>Auth::id()])->count();
-        $total_pending =Employees::where(['user_id'=>Auth::id()])
-            ->whereNull('profile_picture')
-            ->orWhereNull('mobile_no')
-                ->count();
-        $total_update =Employees::where(['user_id'=>Auth::id()])
-            ->whereNotNull('profile_picture')
-            ->whereNotNull('mobile_no')
-                ->count();
+        $user = Auth::user();
+        $department_id = $user->company_id;
+
+        $total_employees =Employees::where(['user_id'=>$user->id,'department_id'=>$department_id])->count();
+        $total_pending =Employees::where(['user_id'=>$user->id,'department_id'=>$department_id])
+            ->whereRaw('(profile_picture IS NULL OR mobile_no IS NULL)')->count();
+
+        $total_update =Employees::where(['user_id'=>Auth::id(),'department_id'=>$department_id])
+            ->whereRaw('(profile_picture IS NOT NULL OR mobile_no IS NOT NULL)')->count();
 
         $data = [
             'title'=>'Dashboard',
