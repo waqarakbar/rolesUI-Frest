@@ -27,7 +27,6 @@
                         <div class="col-12">
 
                             <div class="table-responsive" style="min-height: 200px">
-
                                 <table class="table table-striped" id="datatable">
                                     <thead>
                                     <tr>
@@ -52,7 +51,6 @@
                                     </tbody>
 
                                 </table>
-
                             </div>
 
                         </div>

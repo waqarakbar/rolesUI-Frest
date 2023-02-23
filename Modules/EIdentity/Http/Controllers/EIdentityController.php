@@ -34,12 +34,27 @@ class EIdentityController extends Controller
         $total_update =Employees::where(['user_id'=>Auth::id(),'department_id'=>$department_id])
             ->whereRaw('(profile_picture IS NOT NULL OR mobile_no IS NOT NULL)')->count();
 
+        $overall_employees_counts =Employees::query()
+                                                ->selectRaw(
+                                                    'COUNT(1) as total_employees, 
+                                                    COUNT(IF(mobile_no IS NOT NULL,1,NULL)) as total_employees_mobile_no_filled, 
+                                                    COUNT(IF(mobile_no IS NULL,1,NULL)) as total_employees_mobile_no_pending, 
+                                                    COUNT(IF(profile_picture IS NOT NULL,1,NULL)) as total_employees_profile_pic_filled,
+                                                    COUNT(IF(profile_picture IS NULL,1,NULL)) as total_employees_profile_pic_pending
+                                                    '
+                                                )->first();
+
+
+        //pr($overall_employees_counts->toArray());
+
         $data = [
             'title'=>'Dashboard',
             'total_employees'=>$total_employees,
             'total_pending'=>$total_pending,
-            'total_update'=>$total_update
+            'total_update'=>$total_update,
+            'overall_employees_counts'=>$overall_employees_counts,
         ];
+
         return view('eidentity::index',$data);
     }
 
