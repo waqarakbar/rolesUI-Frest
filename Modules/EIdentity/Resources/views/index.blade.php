@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="card-body" style="min-height:500px">
-                    @if(auth()->user()->hasPermission('eidentity.employee.report.departmentwise'))
+                    @if(auth()->user()->id == 323)
                         <div class="row">
                             <h5>Overall Employees</h5>
                             <div class="col-md-4 col-lg-4 mb-4">
@@ -68,7 +68,6 @@
                             </div>
                         </div>
                     @endif
-
                     <div class="row">
                         <h5>My Own Employees</h5>
                         <div class="col-md-4 col-lg-4 mb-4">
