@@ -27,12 +27,19 @@ class EIdentityController extends Controller
         $user = Auth::user();
         $department_id = $user->company_id;
 
-        $total_employees =Employees::where(['user_id'=>$user->id,'department_id'=>$department_id])->count();
+        $total_employees =Employees::where(['user_id'=>$user->id,'department_id'=>$department_id])
+                            ->whereNotIn('user_id',[355,354])
+                            ->count();
+
         $total_pending =Employees::where(['user_id'=>$user->id,'department_id'=>$department_id])
-            ->whereRaw('(profile_picture IS NULL OR mobile_no IS NULL)')->count();
+                            ->whereRaw('(profile_picture IS NULL OR mobile_no IS NULL)')
+                            ->whereNotIn('user_id',[355,354])
+                            ->count();
 
         $total_update =Employees::where(['user_id'=>Auth::id(),'department_id'=>$department_id])
-            ->whereRaw('(profile_picture IS NOT NULL OR mobile_no IS NOT NULL)')->count();
+                            ->whereRaw('(profile_picture IS NOT NULL OR mobile_no IS NOT NULL)')
+                            ->whereNotIn('user_id',[355,354])
+                            ->count();
 
         $overall_employees_counts =Employees::query()
                                                 ->selectRaw(
@@ -42,7 +49,9 @@ class EIdentityController extends Controller
                                                     COUNT(IF(profile_picture IS NOT NULL,1,NULL)) as total_employees_profile_pic_filled,
                                                     COUNT(IF(profile_picture IS NULL,1,NULL)) as total_employees_profile_pic_pending
                                                     '
-                                                )->first();
+                                                )
+                                                ->whereNotIn('user_id',[355,354])
+                                                ->first();
 
 
         //pr($overall_employees_counts->toArray());
@@ -311,7 +320,7 @@ class EIdentityController extends Controller
                 'employees as pending_profile_pic'=>function($q){
                     $q->whereNull('profile_picture');
                 }
-            ])->get();
+            ])->whereNotIn('id',[355, 354])->get();
 
         //pr($departments->toArray(),true);
         $data = [
