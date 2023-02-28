@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Modules\EIdentity\Entities\BPS;
 use Modules\EIdentity\Entities\Departments;
 use Modules\EIdentity\Entities\Designations;
@@ -328,6 +329,26 @@ class EIdentityController extends Controller
             ])->whereNotIn('id',[355, 354])
             ->whereNull('deleted_at')
             ->get();
+
+        $sql = "SELECT
+                d.id,
+                d.title as title,
+                count(e.id) as employees_count,
+                count(if(e.mobile_no is null, 1, null)) as pending_mobile,
+                count(if(e.profile_picture is null, 1, null)) as pending_profile_pic
+                
+                from ".env('DB_DATABASE').".companies as d 
+                left join ".env('DB_DATABASE').".users as u on d.id = u.company_id
+                left join employees as e on u.id = e.user_id
+                
+                WHERE
+                u.id not in (345,355,356)
+                and e.deleted_at is null
+                
+                GROUP by d.id 
+                ORDER by d.title asc";
+
+        $departments = DB::connection('eidentity')->select($sql);
 
         //pr($departments->toArray(),true);
         $data = [
