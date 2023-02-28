@@ -46,8 +46,8 @@
                                             <td>{{ $item->employee_name }}</td>
                                             <td>{{ $item->father_name }}</td>
                                             <td>{{ $item->cnic }}</td>
-                                            <td>{{ $item->designation->title ?? "-" }}</td>
-                                            <td>{{ $item->bps->title ?? "-" }}</td>
+                                            <td>{{ $item->designation->title ?? "" }}</td>
+                                            <td>{{ $item->bps->title ?? "" }}</td>
                                             <td>{{ $item->mobile_no }}</td>
                                             <td>
                                                 @if(!checkNullAndEmpty($item->profile_picture))
