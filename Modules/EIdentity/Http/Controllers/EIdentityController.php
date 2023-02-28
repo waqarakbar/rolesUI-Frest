@@ -202,7 +202,7 @@ class EIdentityController extends Controller
     public function edit($id)
     {
 
-        $item               = Employees::with(['bps','employeeCategory','designation','guzzetedStatus'])
+        $item               = Employees::with(['bpsMF','employeeCategory','designationMF','guzzetedStatus'])
                              ->find(Crypt::decrypt($id));
 
         $bps_dd             = BPS::pluck('title','id');
@@ -254,7 +254,7 @@ class EIdentityController extends Controller
             'alpha_spaces'=>'only alpha charters(a-z A-Z) with space are acceptable'
         ]);
 
-        $item     = Employees::with(['bps','employeeCategory','designation'])->find(Crypt::decrypt($id));
+        $item     = Employees::with(['bpsMF','employeeCategory','designationMF'])->find(Crypt::decrypt($id));
         $fill_rec = $item->fill($request->all());
 
         //profile picture upload
