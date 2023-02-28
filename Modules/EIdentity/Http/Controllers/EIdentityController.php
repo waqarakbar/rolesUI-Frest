@@ -345,6 +345,7 @@ class EIdentityController extends Controller
                 
                 WHERE
                 u.id not in (2,354,355,356)
+                and d.id not in (353)
                 and e.deleted_at is null
                 
                 GROUP by d.id 
