@@ -37,8 +37,9 @@ class EIdentityController extends Controller
                             ->whereNotIn('user_id',[355,354])
                             ->count();
 
+        // this is incorrect - you should use "ADN" instead of "OR"
         $total_update =Employees::where(['user_id'=>Auth::id()])
-                            ->whereRaw('(profile_picture IS NOT NULL OR mobile_no IS NOT NULL)')
+                            ->whereRaw('(profile_picture IS NOT NULL AND mobile_no IS NOT NULL)')
                             ->whereNotIn('user_id',[355,354])
                             ->count();
 
@@ -334,8 +335,8 @@ class EIdentityController extends Controller
                 d.id,
                 d.title as title,
                 count(e.id) as employees_count,
-                count(if(e.mobile_no is null, 1, null)) as pending_mobile,
-                count(if(e.profile_picture is null, 1, null)) as pending_profile_pic
+                count(if(e.mobile_no is null or profile_picture is null, 1, null)) as pending_update
+                -- count(if(e.profile_picture is null, 1, null)) as pending_profile_pic
                 
                 from ".env('DB_DATABASE').".companies as d 
                 left join ".env('DB_DATABASE').".users as u on d.id = u.company_id
