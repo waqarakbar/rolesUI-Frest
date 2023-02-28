@@ -72,7 +72,7 @@ class EIdentityController extends Controller
 
     public function list()
     {
-        $employees = Employees::with(['bps','designation'])
+        $employees = Employees::with(['bpsMF','designationMF'])
                     ->where(['user_id'=>Auth::id()])
                     ->orderByDesc('bps_id')
                     ->get();
