@@ -1,7 +1,5 @@
-{{--@extends('layouts.'.config('settings.active_layout'))--}}
-@extends('layouts.restricted_layout')
+@extends('layouts.'.config('eidentity.active_layout'))
 @php $app_id = config('settings.app_id') @endphp
-
 
 @section('content')
 

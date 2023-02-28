@@ -44,13 +44,14 @@ class EIdentityController extends Controller
         $overall_employees_counts =Employees::query()
                                                 ->selectRaw(
                                                     'COUNT(1) as total_employees, 
-                                                    COUNT(IF(mobile_no IS NOT NULL,1,NULL)) as total_employees_mobile_no_filled, 
-                                                    COUNT(IF(mobile_no IS NULL,1,NULL)) as total_employees_mobile_no_pending, 
-                                                    COUNT(IF(profile_picture IS NOT NULL,1,NULL)) as total_employees_profile_pic_filled,
-                                                    COUNT(IF(profile_picture IS NULL,1,NULL)) as total_employees_profile_pic_pending
+                                                    COUNT(IF(mobile_no IS NOT NULL AND deleted_at IS NULL,1,NULL)) as total_employees_mobile_no_filled, 
+                                                    COUNT(IF(mobile_no IS NULL AND deleted_at IS NULL,1,NULL)) as total_employees_mobile_no_pending, 
+                                                    COUNT(IF(profile_picture IS NOT NULL AND deleted_at IS NULL,1,NULL)) as total_employees_profile_pic_filled,
+                                                    COUNT(IF(profile_picture IS NULL AND deleted_at IS NULL,1,NULL)) as total_employees_profile_pic_pending
                                                     '
                                                 )
                                                 ->whereNotIn('user_id',[355,354])
+                                                ->whereNull('deleted_at')
                                                 ->first();
 
 
@@ -313,14 +314,20 @@ class EIdentityController extends Controller
         $departments = Company::query()
             ->where('id','>',1)
             ->withCount([
-                'employees',
+                'employees'=>function($q){
+                    $q->whereNull('deleted_at');
+                },
                 'employees as pending_mobile'=>function($q){
-                    $q->whereNull('mobile_no');
+                    $q->whereNull('mobile_no')
+                    ->whereNull('deleted_at');
                 },
                 'employees as pending_profile_pic'=>function($q){
-                    $q->whereNull('profile_picture');
+                    $q->whereNull('profile_picture')
+                        ->whereNull('deleted_at');
                 }
-            ])->whereNotIn('id',[355, 354])->get();
+            ])->whereNotIn('id',[355, 354])
+            ->whereNull('deleted_at')
+            ->get();
 
         //pr($departments->toArray(),true);
         $data = [
