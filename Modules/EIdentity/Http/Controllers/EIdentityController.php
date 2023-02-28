@@ -344,7 +344,7 @@ class EIdentityController extends Controller
                 left join employees as e on u.id = e.user_id
                 
                 WHERE
-                u.id not in (354,355,356)
+                u.id not in (2,354,355,356)
                 and e.deleted_at is null
                 
                 GROUP by d.id 
