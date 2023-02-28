@@ -335,8 +335,9 @@ class EIdentityController extends Controller
                 d.id,
                 d.title as title,
                 count(e.id) as employees_count,
-                count(if(e.mobile_no is null or profile_picture is null, 1, null)) as pending_update
-                -- count(if(e.profile_picture is null, 1, null)) as pending_profile_pic
+                count(if(e.mobile_no is null or profile_picture is null, 1, null)) as pending_update,
+                count(if(e.mobile_no is null, 1, null)) as pending_mobile,
+                count(if(e.profile_picture is null, 1, null)) as pending_profile_pic
                 
                 from ".env('DB_DATABASE').".companies as d 
                 left join ".env('DB_DATABASE').".users as u on d.id = u.company_id
