@@ -86,11 +86,7 @@
                 var label = $(this).html();
                 $(this).html(label+" <span class='starik' style='color:red;font-size:11px;'>*</span>");
             })
-
         });
-
-
-
     </script>
 </head>
 
