@@ -38,6 +38,7 @@
                                         <th>Total Employees</th>
                                         <th>Mobile (Pending)</th>
                                         <th>Picture (Pending)</th>
+                                       {{-- <th>Update Pending</th>--}}
                                         <th>Completed</th>
                                     </tr>
                                     </thead>
@@ -48,9 +49,10 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->title }}</td>
                                             <td>{{ $item->employees_count }}</td>
+                                            {{--<td>{{ $item->pending_update }}</td>--}}
                                             <td>{{ $item->pending_mobile }}</td>
                                             <td>{{ $item->pending_profile_pic }}</td>
-                                            <td>{{ ($item->employees_count - $item->pending_profile_pic) }}</td>
+                                            <td>{{ ($item->employees_count - $item->pending_update) }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

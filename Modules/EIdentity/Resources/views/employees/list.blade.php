@@ -41,13 +41,14 @@
 
                                     <tbody>
                                     @foreach($employees as $item)
+
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->employee_name }}</td>
                                             <td>{{ $item->father_name }}</td>
                                             <td>{{ $item->cnic }}</td>
-                                            <td>{{ $item?->designation }}</td>
-                                            <td>{{ $item?->bps }}</td>
+                                            <td>{{ $item->designationMF->title ?? "" }}</td>
+                                            <td>{{ $item->bpsMF->title ?? "" }}</td>
                                             <td>{{ $item->mobile_no }}</td>
                                             <td>
                                                 @if(!checkNullAndEmpty($item->profile_picture))

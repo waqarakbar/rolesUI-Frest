@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 use Modules\EIdentity\Entities\BPS;
 use Modules\EIdentity\Entities\Departments;
 use Modules\EIdentity\Entities\Designations;
@@ -27,17 +28,18 @@ class EIdentityController extends Controller
         $user = Auth::user();
         $department_id = $user->company_id;
 
-        $total_employees =Employees::where(['user_id'=>$user->id,'department_id'=>$department_id])
+        $total_employees =Employees::where(['user_id'=>$user->id])
                             ->whereNotIn('user_id',[355,354])
                             ->count();
 
-        $total_pending =Employees::where(['user_id'=>$user->id,'department_id'=>$department_id])
+        $total_pending =Employees::where(['user_id'=>$user->id])
                             ->whereRaw('(profile_picture IS NULL OR mobile_no IS NULL)')
                             ->whereNotIn('user_id',[355,354])
                             ->count();
 
-        $total_update =Employees::where(['user_id'=>Auth::id(),'department_id'=>$department_id])
-                            ->whereRaw('(profile_picture IS NOT NULL OR mobile_no IS NOT NULL)')
+        // this is incorrect - you should use "ADN" instead of "OR"
+        $total_update =Employees::where(['user_id'=>Auth::id()])
+                            ->whereRaw('(profile_picture IS NOT NULL AND mobile_no IS NOT NULL)')
                             ->whereNotIn('user_id',[355,354])
                             ->count();
 
@@ -70,7 +72,7 @@ class EIdentityController extends Controller
 
     public function list()
     {
-        $employees = Employees::with(['bps','designation'])
+        $employees = Employees::with(['bpsMF','designationMF'])
                     ->where(['user_id'=>Auth::id()])
                     ->orderByDesc('bps_id')
                     ->get();
@@ -200,7 +202,7 @@ class EIdentityController extends Controller
     public function edit($id)
     {
 
-        $item               = Employees::with(['bps','employeeCategory','designation','guzzetedStatus'])
+        $item               = Employees::with(['bpsMF','employeeCategory','designationMF','guzzetedStatus'])
                              ->find(Crypt::decrypt($id));
 
         $bps_dd             = BPS::pluck('title','id');
@@ -252,7 +254,7 @@ class EIdentityController extends Controller
             'alpha_spaces'=>'only alpha charters(a-z A-Z) with space are acceptable'
         ]);
 
-        $item     = Employees::with(['bps','employeeCategory','designation'])->find(Crypt::decrypt($id));
+        $item     = Employees::with(['bpsMF','employeeCategory','designationMF'])->find(Crypt::decrypt($id));
         $fill_rec = $item->fill($request->all());
 
         //profile picture upload
@@ -328,6 +330,28 @@ class EIdentityController extends Controller
             ])->whereNotIn('id',[355, 354])
             ->whereNull('deleted_at')
             ->get();
+
+        $sql = "SELECT
+                d.id,
+                d.title as title,
+                count(e.id) as employees_count,
+                count(if(e.mobile_no is null or profile_picture is null, 1, null)) as pending_update,
+                count(if(e.mobile_no is null, 1, null)) as pending_mobile,
+                count(if(e.profile_picture is null, 1, null)) as pending_profile_pic
+                
+                from ".env('DB_DATABASE').".companies as d 
+                left join ".env('DB_DATABASE').".users as u on d.id = u.company_id
+                left join employees as e on u.id = e.user_id
+                
+                WHERE
+                u.id not in (2,354,355,356)
+                and d.id not in (353)
+                and e.deleted_at is null
+                
+                GROUP by d.id 
+                ORDER by d.title asc";
+
+        $departments = DB::connection('eidentity')->select($sql);
 
         //pr($departments->toArray(),true);
         $data = [

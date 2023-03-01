@@ -18,11 +18,11 @@ class Employees extends Model
 'designation_code','cnic','dob','date_of_appointment','profile_picture','name_of_working_section',
         'reporting_to_designation_id','ipms_department_id'];
 
-    public function bps(){
+    public function bpsMF(){
         return $this->belongsTo(BPS::class,'bps_id','id');
     }
 
-    public function designation(){
+    public function designationMF(){
         return $this->belongsTo(Designations::class,'designation_id','id');
     }
 
