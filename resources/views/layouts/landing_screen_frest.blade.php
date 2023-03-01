@@ -509,18 +509,18 @@
                                         </div>
                                     </a>
                                 </li>
-                                {{--
+
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="pages-profile-user.html">
+                                    <a class="dropdown-item" href="{{route('settings.users-mgt.my-profile')}}">
                                         <i class="bx bx-user me-2"></i>
                                         <span class="align-middle">My Profile</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="pages-account-settings-account.html">
+                                    <a class="dropdown-item" href="{{route('settings.users-mgt.change-password')}}">
                                         <i class="bx bx-cog me-2"></i>
                                         <span class="align-middle">Change Password</span>
                                     </a>
@@ -530,7 +530,7 @@
                                     <div class="dropdown-divider"></div>
                                 </li>
 
-                                --}}
+
                                 <li>
 
                                     {{--<a class="dropdown-item" href="auth-login-cover.html" target="_blank">

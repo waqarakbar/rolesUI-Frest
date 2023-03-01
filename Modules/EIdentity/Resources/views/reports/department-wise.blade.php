@@ -15,18 +15,21 @@
                 <div class="card-header header-elements-inline">
                     <h6 class="card-title">{{ $title }}</h6>
                     <div class="header-elements">
-                    </div>
-                    <div class="text-right" style="text-align: right">
+                        <div class="text-right" style="text-align: right">
+                            <a href="javascript:void(0)" class="btn btn-primary"
+                               onclick="$('.printable_report').printThis({importCSS: true, loadCSS: '<?php echo asset('assets/css/print.css'); ?>'});">
+                                <i class="fa fa-print"></i> Print
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-
                     <div class="row">
-
-
                         <div class="col-12">
-
-                            <div class="table-responsive" style="min-height: 200px">
+                            <div class="table-responsive printable_report Landscape" style="min-height: 200px">
+                                <div class="show_in_print">
+                                    @include('eidentity::reports.print_header')
+                                </div>
                                 <table class="table table-striped" id="datatable">
                                     <thead>
                                     <tr>
@@ -54,11 +57,8 @@
 
                                 </table>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
             </div>
             <!-- /traffic sources -->
@@ -86,8 +86,7 @@
     <script src="{{asset('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.js')}}"></script>
     <script src="{{asset('assets/vendor/libs/datatables-rowgroup/datatables.rowgroup.js')}}"></script>
     <script src="{{asset('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.js')}}"></script>
-
-
+    <script src="{{asset('assets/vendor/printThis/printThis.js')}}"></script>
     <script>
         $(document).ready(function (){
             $("#datatable").DataTable({

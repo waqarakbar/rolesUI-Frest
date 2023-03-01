@@ -25,3 +25,7 @@
 .bg-green-new{
     background: #06AA91 !important;
 }
+
+.show_in_print {
+    display: none;
+}
