@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Vms\Entities;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -11,16 +11,12 @@ use App\Traits\BranchTrait;
 
 class Visitor extends Model
 {
-    use HasFactory, SoftDeletes, BranchTrait, LogsActivity;
+    use HasFactory, SoftDeletes;
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $appends = ['status_text', 'department_name', 'gate_name', 'visitor_name'];
     protected $connection = "vms";
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logOnly(['name', 'text']);
-        // Chain fluent methods for configuration options
-    }
+
+
 
     public function user()
     {

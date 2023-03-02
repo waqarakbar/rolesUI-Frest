@@ -1,23 +1,18 @@
 <?php
 
-namespace App\Models;
+namespace Modules\Vms\Entities;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Spatie\Permission\Traits\HasRoles;
-use Laravel\Sanctum\HasApiTokens;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable implements HasMedia
+class VisitorRegistration implements HasMedia
 {
 
-    use HasFactory, HasApiTokens, Notifiable, HasRoles, SoftDeletes, LogsActivity, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia;
     /**
      * The attributes that are mass assignable.
      *
@@ -46,12 +41,7 @@ class User extends Authenticatable implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-    public function getActivitylogOptions(): LogOptions
-    {
-        return LogOptions::defaults()
-            ->logOnly(['name', 'text']);
-        // Chain fluent methods for configuration options
-    }
+  
 
     public function registerMediaCollections(): void
     {
