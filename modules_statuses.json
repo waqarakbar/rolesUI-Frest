@@ -3,5 +3,6 @@
     "SupplyChain": true,
     "IncidentReporting": true,
     "TaskManagement": true,
-    "EIdentity": true
+    "EIdentity": true,
+    "Vms": true
 }
