@@ -13,6 +13,8 @@ class VisitorRegistration implements HasMedia
 {
 
     use HasFactory, SoftDeletes, InteractsWithMedia;
+    protected $connection = "vms";
+    protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
@@ -41,7 +43,7 @@ class VisitorRegistration implements HasMedia
         'email_verified_at' => 'datetime',
     ];
 
-  
+
 
     public function registerMediaCollections(): void
     {
