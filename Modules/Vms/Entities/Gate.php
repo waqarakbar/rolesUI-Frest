@@ -12,6 +12,7 @@ class Gate extends Model
 {
     use HasFactory, SoftDeletes, LogsActivity;
     protected $guarded = ['id', 'created_at', 'updated_at'];
+    protected $connection = "vms";
 
 
     //logging Activity of Model 

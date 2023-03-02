@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class VehcileManufacturer extends Model
 {
     use HasFactory;
+    protected $connection = "vms";
 }

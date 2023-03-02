@@ -14,6 +14,7 @@ class Visitor extends Model
     use HasFactory, SoftDeletes, BranchTrait, LogsActivity;
     protected $guarded = ['id', 'created_at', 'updated_at'];
     protected $appends = ['status_text', 'department_name', 'gate_name', 'visitor_name'];
+    protected $connection = "vms";
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()

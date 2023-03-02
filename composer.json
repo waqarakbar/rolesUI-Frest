@@ -14,7 +14,8 @@
         "laravel/ui": "^3.4",
         "laravelcollective/html": "^6.3",
         "milon/barcode": "^9.0",
-        "nwidart/laravel-modules": "^9.0"
+        "nwidart/laravel-modules": "^9.0",
+        "spatie/laravel-medialibrary": "10.0.0"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -65,7 +66,10 @@
     "config": {
         "optimize-autoloader": true,
         "preferred-install": "dist",
-        "sort-packages": true
+        "sort-packages": true,
+        "allow-plugins": {
+            "phpstan/extension-installer": true
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
