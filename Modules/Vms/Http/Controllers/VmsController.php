@@ -5,6 +5,10 @@ namespace Modules\Vms\Http\Controllers;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Yajra\Datatables\Datatables;
+use Modules\Vms\Entities\User;
+use Modules\Vms\Entities\Visitor;
+use App\Models\Department;
 
 class VmsController extends Controller
 {
@@ -14,7 +18,11 @@ class VmsController extends Controller
      */
     public function index()
     {
-        return view('vms::index');
+        $requested=Visitor::query()->where(['department_id'=>auth()->user()->department_id,'status'=>2])->count();
+        $reject=Visitor::query()->where(['department_id'=>auth()->user()->department_id,'status'=>4])->count();
+        $accept=Visitor::query()->where(['department_id'=>auth()->user()->department_id,'status'=>3])->count();
+        $visited = Visitor::query()->where(['department_id'=>auth()->user()->department_id,'status'=>1])->count();
+        return view('vms::index', compact('reject','accept','visited','requested'));
     }
 
     /**
