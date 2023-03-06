@@ -4,12 +4,12 @@ namespace Modules\Vms\Entities;
 
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Spatie\Activitylog\LogOptions;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
 
-class VisitorRegistration implements HasMedia
+class VisitorRegistration extends Model implements HasMedia 
 {
 
     use HasFactory, SoftDeletes, InteractsWithMedia;

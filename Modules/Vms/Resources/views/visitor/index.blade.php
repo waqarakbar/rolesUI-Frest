@@ -2,31 +2,25 @@
 @php $app_id = config('vms.app_id') @endphp
 
 @section('title', 'Visitor')
-@push('plugin-styles')
-    {!! Html::style('plugins/table/datatable/datatables.css') !!}
-    {!! Html::style('plugins/table/datatable/dt-global_style.css') !!}
+@push('stylesheets')
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 @endpush
 
 @section('content')
-    <!--  Navbar Starts / Breadcrumb Area  -->
 
-    <!--  Navbar Ends / Breadcrumb Area  -->
-    <!-- Main Body Starts -->
     <div class="layout-top-spacing mb-2">
         <div class="col-md-12">
             <div class="row">
                 <div class="container p-0">
-                    <div class="row layout-top-spacing date-table-container">
+                    <div class="row date-table-container">
 
                         <!-- Datatable go to last page -->
                         <div class="col-xl-12 col-lg-12 col-sm-12  card">
                             <div class="card-header d-flex justify-content-between align-items-center">
-                                <h5 class="card-title mb-0">{{ __('Visitor Managment') }}s</h5>
+                                <h5 class="card-title mb-0">{{ $title }}</h5>
                                 <div>
-                                    {{-- @can('visitor-create') --}}
                                     <a href="{{ route('visitors.create') }}" class="btn btn-primary">Create</a>
-                                    {{-- @endcan --}}
-
                                 </div>
                             </div>
                             <div class="card-body">
@@ -42,10 +36,7 @@
                                                 <th>Name</th>
                                                 <th>Cnic</th>
                                                 <th>purpose</th>
-
                                                 <th>Department</th>
-                                                <th>print</th>
-
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -113,19 +104,18 @@
 
 
 
-
+    @extends('vms::visitor/modal');
 
 @endsection
 
-@push('plugin-scripts')
-    {!! Html::script('assets/js/loader.js') !!}
-    {!! Html::script('plugins/table/datatable/datatables.js') !!}
-    {!! Html::script('plugins/sweetalerts/sweetalert2.min.js') !!}
-    {!! Html::script('assets/js/basicui/sweet_alerts.js') !!}
-    {!! Html::script('plugins/fullcalendar/moment.min.js') !!}
-@endpush
+@push('scripts')
+    <script src="{{ asset('assets/vendor/libs/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js') }}"></script>
 
-@push('custom-scripts')
+
+
     <script>
         $(document).ready(function() {
 
@@ -139,8 +129,6 @@
                 }
                 i++;
             });
-
-
             if (params != '') {
                 var url = "{{ route('visitors.index') }}?" + params;
             } else {
@@ -180,43 +168,43 @@
                         orderable: false,
                     },
                     {
-                        data: 'department.title',
+                        data: 'department_name',
                         orderable: false,
                         visible: "{{ Auth::user()->hasRole('Department') ? false : true }}"
                     },
+
+                    // {
+                    //     data: null,
+                    //     orderable: false,
+
+                    //     render: function(data, type, row) {
+                    //         var editUrl = "{{ route('visitor.print', ':id') }}";
+                    //         editUrl = editUrl.replace(':id', data.id);
+                    //         isVisistor = "{{ Auth::user()->hasRole('visitor') ? true : 0 }}";
+                    //         let verificationButton = data.status == 2 ?
+                    //             "{!! Auth::user()->hasRole('Department') ? '<button class=\"btn btn-warning btn-sm modalAction \"  data-model=" +
+                    //             encodeURIComponent(JSON.stringify(data)) +
+                    //             "><i class=\"las la-check la-2x\" ></i></button>':''!! }" : '';
+                    //         let printBtn = "<a class=\"btn btn-primary btn-sm\"  href=\"" +
+                    //             editUrl + "\"><i class=\"las la-print la-2x\"></i></a>";
+                    //         let printbutton = isVisistor == 1 ? data.status == 3 ? printBtn : '' :
+                    //             printBtn;
+                    //         return printbutton + verificationButton;
+                    //     }
+
+                    // },
+
+
+
                     {
                         data: null,
                         orderable: false,
-
                         render: function(data, type, row) {
-                            var editUrl = "{{ route('visitor.print', ':id') }}";
-                            editUrl = editUrl.replace(':id', data.id);
-                            isVisistor = "{{ Auth::user()->hasRole('visitor') ? true : 0 }}";
 
-                            let verificationButton = data.status == 2 ?
-                                "{!! Auth::user()->hasRole('Department')
-                                    ? '<button class=\"btn btn-warning btn-sm modalAction \"  data-model=" + encodeURIComponent(JSON.stringify(data)) + "><i class=\"las la-check la-2x\" ></i></button>'
-                                    : '' !!}" :
-                                '';
-                            let printBtn = "<a class=\"btn btn-primary btn-sm\"  href=\"" +
-                                editUrl +
-                                "\"><i class=\"las la-print la-2x\"></i></a>";
-                            let printbutton = isVisistor == 1 ? data.status == 3 ? printBtn : '' :
-                                printBtn;
-                            return printbutton + verificationButton;
-
-
-
+                            return "<button class = \"btn btn-warning btn-sm showDetails\"  data-model=" +
+                                encodeURIComponent(JSON.stringify(data)) +
+                                ">View</button>"
                         }
-
-                    },
-
-
-
-                    {
-                        data: "action",
-                        orderable: false,
-                        searchable: false,
                     }
 
                 ],
@@ -231,38 +219,131 @@
                 if (value == 4) {
                     $("#rejected_reason").show();
                 } else {
-                    $("#rejected_reason").hide();
+                    var url = "{{ route('visitors.index') }}";
                 }
-            });
 
-
-            $("#modalSubmit").submit(function(e) {
-                e.preventDefault();
-                let form = $("#modalSubmit");
-                let formData = form.serializeArray();
-                var token = $('input[name="_token"]').val();
-                console.log(formData);
-                $.ajax({
-                    url: `/app/visitor-managment/visitors/${formData[0].value}`,
-                    type: 'PUT',
-                    // dataType: "JSON",
-                    data: formData,
-                    headers: {
-                        'X-CSRF-Token': token
+                $('#last-page-dt').DataTable({
+                    "pagingType": "full_numbers",
+                    "language": {
+                        "paginate": {
+                            "first": "<i class='las la-angle-double-left'></i>",
+                            "previous": "<i class='las la-angle-left'></i>",
+                            "next": "<i class='las la-angle-right'></i>",
+                            "last": "<i class='las la-angle-double-right'></i>"
+                        }
                     },
-                    success: function(response) {
-                        if (response.success == true) {
-                            Swal.fire({
-                                title: "Success",
-                                text: response.message,
-                                icon: "success",
-                                showCancelButton: false,
-                                confirmButtonText: "Ok",
-                                allowOutsideClick: false,
-                            });
-                            $("#myModal").modal('hide');
-                            $('#last-page-dt').DataTable().ajax.reload();
-                        } else {
+                    "lengthMenu": [7, 14, 21, 28],
+                    "pageLength": 7,
+                    "ajax": url,
+                    "processing": true,
+                    "serverSide": true,
+                    "columns": [{
+                            data: 'id',
+                        },
+                        {
+                            data: 'user.name',
+                            name: 'user.name',
+                            orderable: false,
+                        },
+
+                        {
+                            data: 'user.cnic',
+                            orderable: false,
+                        },
+                        {
+                            data: 'purpose',
+                            orderable: false,
+                        },
+                        {
+                            data: 'department_name',
+                            orderable: false,
+                            visible: "{{ Auth::user()->hasRole('Department') ? false : true }}"
+                        },
+
+                        // {
+                        //     data: null,
+                        //     orderable: false,
+
+                        //     render: function(data, type, row) {
+                        //         var editUrl = "{{ route('visitor.print', ':id') }}";
+                        //         editUrl = editUrl.replace(':id', data.id);
+                        //         isVisistor = "{{ Auth::user()->hasRole('visitor') ? true : 0 }}";
+                        //         let verificationButton = data.status == 2 ?
+                        //             "{!! Auth::user()->hasRole('Department') ? '<button class=\"btn btn-warning btn-sm modalAction \"  data-model=" +
+                        //             encodeURIComponent(JSON.stringify(data)) +
+                        //             "><i class=\"las la-check la-2x\" ></i></button>':''!! }" : '';
+                        //         let printBtn = "<a class=\"btn btn-primary btn-sm\"  href=\"" +
+                        //             editUrl + "\"><i class=\"las la-print la-2x\"></i></a>";
+                        //         let printbutton = isVisistor == 1 ? data.status == 3 ? printBtn : '' :
+                        //             printBtn;
+                        //         return printbutton + verificationButton;
+                        //     }
+
+                        // },
+
+
+
+                        {
+                            data: "null",
+                            orderable: false,
+                            searchable: false,
+                        }
+
+                    ],
+
+
+
+                });
+
+
+                $('#status').change(function() {
+                    var value = $(this).val();
+                    if (value == 4) {
+                        $("#rejected_reason").show();
+                    } else {
+                        $("#rejected_reason").hide();
+                    }
+                });
+
+
+                $("#modalSubmit").submit(function(e) {
+                    e.preventDefault();
+                    let form = $("#modalSubmit");
+                    let formData = form.serializeArray();
+                    var token = $('input[name="_token"]').val();
+                    console.log(formData);
+                    $.ajax({
+                        url: `/app/visitor-managment/visitors/${formData[0].value}`,
+                        type: 'PUT',
+                        // dataType: "JSON",
+                        data: formData,
+                        headers: {
+                            'X-CSRF-Token': token
+                        },
+                        success: function(response) {
+                            if (response.success == true) {
+                                Swal.fire({
+                                    title: "Success",
+                                    text: response.message,
+                                    icon: "success",
+                                    showCancelButton: false,
+                                    confirmButtonText: "Ok",
+                                    allowOutsideClick: false,
+                                });
+                                $("#myModal").modal('hide');
+                                $('#last-page-dt').DataTable().ajax.reload();
+                            } else {
+                                Swal.fire({
+                                    title: "Error",
+                                    text: response.message,
+                                    icon: "error",
+                                    showCancelButton: false,
+                                    confirmButtonText: "Ok",
+                                    allowOutsideClick: false,
+                                });
+                            }
+                        },
+                        error: function(response) {
                             Swal.fire({
                                 title: "Error",
                                 text: response.message,
@@ -270,31 +351,20 @@
                                 showCancelButton: false,
                                 confirmButtonText: "Ok",
                                 allowOutsideClick: false,
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload();
+                                }
                             });
                         }
-                    },
-                    error: function(response) {
-                        Swal.fire({
-                            title: "Error",
-                            text: response.message,
-                            icon: "error",
-                            showCancelButton: false,
-                            confirmButtonText: "Ok",
-                            allowOutsideClick: false,
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                location.reload();
-                            }
-                        });
-                    }
+                    });
                 });
+
+
+
             });
 
-
-
         });
-
-
         $("#Modelcancel").on('click', function() {
             $("#myModal").modal('hide');
         });

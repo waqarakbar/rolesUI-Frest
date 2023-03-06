@@ -5,7 +5,7 @@ namespace Modules\Vms\Entities;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Support\Carbon;
 
 class Visitor extends Model
 {
@@ -16,14 +16,15 @@ class Visitor extends Model
 
 
 
+ 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(\Modules\Vms\Entities\VisitorRegistration::class, 'user_id');
     }
 
     public function creator()
     {
-        return $this->belongsTo(User::class, 'creator_id');
+        return $this->belongsTo(\Modules\Vms\Entities\VisitorRegistration::class, 'creator_id');
     }
 
     public function gate()
@@ -33,7 +34,7 @@ class Visitor extends Model
 
     public function department()
     {
-        return $this->belongsTo(Department::class);
+        return $this->belongsTo(\Modules\Settings\Entities\Company::class, 'department_id');
     }
 
     public function getStatusTextAttribute()
@@ -61,7 +62,7 @@ class Visitor extends Model
 
     public function getDepartmentNameAttribute()
     {
-        return Department::where('id', $this->department_id)->value('title') ?? '';
+        return \Modules\Settings\Entities\Company::where('id', $this->department_id)->value('title') ?? '';
     }
 
     public function getGateNameAttribute()
@@ -71,6 +72,6 @@ class Visitor extends Model
 
     public function getVisitorNameAttribute()
     {
-        return User::where('id', $this->user_id)->value('name') ?? '';
+        return VisitorRegistration::where('id', $this->user_id)->value('name') ?? '';
     }
 }

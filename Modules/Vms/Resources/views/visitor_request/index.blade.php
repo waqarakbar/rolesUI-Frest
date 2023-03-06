@@ -30,40 +30,51 @@
             <div class="col-md-12">
                 <div class="row">
                     <div class="container p-0">
+
+
                         <div class="row layout-top-spacing date-table-container">
+                            <div class="card">
 
-                            <!-- Datatable go to last page -->
-                            <div class="col-xl-12 col-lg-12 col-sm-12 card">
-                                <div class="widget-content widget-content-area br-6">
-                                    <div class="row">
-                                        <div class="col-sm-10">
-                                            <h4 class="table-header">{{ __('Visitor Managment') }}</h4>
+                                <!-- Datatable go to last page -->
+                                <div class="col-xl-12 col-lg-12 col-sm-12  ">
+                                    <div class="card-header d-flex justify-content-between align-items-center">
+
+                                        <div class="widget-content widget-content-area br-6">
+                                            <div class="row">
+                                                <div class="col-sm-10">
+                                                    <h4 class="table-header">{{ __('Visitor Managment') }}</h4>
+                                                </div>
+                                                <div class="col-sm-2 text-right">
+                                                    @can('visitor-create')
+                                                        <a href="{{ route('visitors.create') }}"
+                                                            class="btn btn-primary">Create</a>
+                                                    @endcan
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-sm-2 text-right">
-                                            @can('visitor-create')
-                                                <a href="{{ route('visitors.create') }}" class="btn btn-primary">Create</a>
-                                            @endcan
+
+                                        <div class="card-body">
+
+
+                                            <div class="table-responsive mb-4">
+                                                <table id="last-page-dt" class="table table-hover" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ID</th>
+                                                            <th>Name</th>
+                                                            <th>Department</th>
+                                                            <th>print</th>
+
+                                                            <th></th>
+                                                        </tr>
+                                                    </thead>
+
+
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
 
-
-
-                                    <div class="table-responsive mb-4">
-                                        <table id="last-page-dt" class="table table-hover" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Name</th>
-                                                    <th>Department</th>
-                                                    <th>print</th>
-
-                                                    <th></th>
-                                                </tr>
-                                            </thead>
-
-
-                                        </table>
-                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -13,6 +13,7 @@ use Modules\Vms\Entities\VehcileManufacturer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Session;
 
 
 use Hash;
@@ -32,7 +33,6 @@ class VisitorController extends Controller
 
     public function print($id)
     {
-
         $visitor = Visitor::with(['user', 'department', 'gate'])->findorfail($id);
         return view('vms::visitor.print', compact('visitor'));
     }
@@ -58,7 +58,7 @@ class VisitorController extends Controller
     {
 
         if ($request->ajax()) {
-            $modelData = Visitor::query()->with(['user', 'department'])->has('user')->has('department');
+            $modelData = Visitor::query()->with(['user', 'department'])->has('user');
 
             $modelData->when($request->has('status'), function ($q) use ($request) {
                 return $q->whereIn('status', explode(",", $request->status));
@@ -76,10 +76,13 @@ class VisitorController extends Controller
 
             $modelData->orderBy('created_at',  'desc');
             return Datatables::of($modelData)->addColumn('action', function ($row) {
-                return customButton($row,  'visitor', 'visitors', true);
+                return '';
             })->rawColumns(['action'])->toJson();
         }
-        return view('vms::visitor.index');
+        $data = [
+            'title' => 'Visitors List'
+        ];
+        return view('vms::visitor.index', $data);
     }
 
     /**
@@ -100,29 +103,21 @@ class VisitorController extends Controller
         ];
         return view('vms::visitor.create', $data);
     }
+
+
     public function epass()
     {
-        $gate = Gate::get();
 
-        return view('vms::visitor.epass', compact('gate'));
-    }
-    private function getBase64Content($data)
-    {
-        list($type, $data) = explode(';', $data);
-        list(, $data) = explode(',', $data);
-        $data = base64_decode($data);
+        $data = [
+            'title' => 'Epass Visitor',
 
-        return $data;
+            'gate' => Gate::get(),
+        ];
+        return view('vms::visitor.epass', $data);
     }
 
-    public function saveFileFromBase64($filename, $data)
-    {
-        $data = $this->getBase64Content($data);
-        file_put_contents($filename, $data);
-        $file = new \File($filename);
 
-        return $file;
-    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -131,6 +126,8 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
+
+
         // $validator = Validator::make($request->all(), [
         //     'department_id' => 'required',
         //     'gate_id' => 'required',
@@ -144,16 +141,14 @@ class VisitorController extends Controller
 
 
         $user = VisitorRegistration::where('cnic', $request->cnic)->first();
-     
         if (!$user) {
-            // user doesn't exist
             $pass = 1235678;
             $input = $request->all();
             $input['password'] = Hash::make($pass);
             $input['email'] = $request->cnic;
-
-            $user = User::create($input);
-            $user->assignRole('visitor');
+            $input['type'] = 'visitor';
+            $user = VisitorRegistration::create($input);
+            // $user->assignRole('visitor');
             if ($request->has('profile')) {
                 if (!empty($request->profile)) {
                     $user->addMediaFromBase64($request->profile)->usingFileName('user_proifle_' . time() . '.png')->toMediaCollection('user_profile');
@@ -179,6 +174,7 @@ class VisitorController extends Controller
         $model->fill($data);
         $model->save();
 
+        Session::flash('success', 'New Visitor created successfully');
         return redirect()->route('visitors.create');
     }
 
@@ -190,8 +186,11 @@ class VisitorController extends Controller
      */
     public function show($id)
     {
-        $visitor = Visitor::findOrFail($id);
-        return view('avms::visitor.show', compact('visitor'));
+        $data = [
+            'title' => 'Visitor Details',
+            'visitor' => Visitor::findOrFail($id),
+        ];
+        return view('avms::visitor.show', $data);
     }
 
     /**
@@ -203,7 +202,8 @@ class VisitorController extends Controller
     public function edit($id)
     {
         $gate = Gate::get();
-        $department = Department::get();
+        $department =  Company::get();
+
         $vehcilemanufacturer = VehcileManufacturer::get();
 
 
@@ -276,6 +276,6 @@ class VisitorController extends Controller
      */
     public function destroy(Visitor $visitor)
     {
-        //
+        Session::flash('success', 'Visitor Deleted successfully');
     }
 }

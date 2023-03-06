@@ -85,7 +85,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label>Vehicle make :</label>
-                                                <select class="select2-multiple  form-control" style="width: 100% ;height:45px;" name="vehicle_make" required>
+                                                <select class="select2-multiple  form-control" style="width: 100% ;height:45px;" name="vehicle_make" >
                                                     <option value="">Select Vehicle make</option>
                                                     @foreach ($vehcilemanufacturer as $value)
                                                     <option value="{{ $value->id }}">{{ $value->name }}
@@ -245,7 +245,19 @@
 @endsection
 
 @push('stylesheets')
-<link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+<style type="text/css">
+    .qrcode {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 4px;
+    }
+
+    .select2-container .select2-selection--single {
+        height: 40px;
+        border: 1px solid #dcdcdc;
+        border-radius: 7px;
+    }
+</style>
 @endpush
 
 @push('scripts')
