@@ -1,7 +1,6 @@
 <?php
 
 namespace Modules\Vms\Http\Controllers;
-
 use App\Models\Visitor;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -25,6 +24,7 @@ class VisitRequestController extends Controller
     //     $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
     //     $this->middleware('permission:request-delete', ['only' => ['destroy']]);
     // }
+    
     /**
      * Display a listing of the resource.
      *
@@ -39,7 +39,6 @@ class VisitRequestController extends Controller
     {
         if ($request->ajax()) {
             $modelData = Visitor::query()->where('user_id', Auth::User()->id)->with(['user', 'department']);
-
             //query For Department Role Status 
             $modelData->when($request->has('status'), function ($q) use ($request) {
                 return $q->whereIn('status', explode(",", $request->status));

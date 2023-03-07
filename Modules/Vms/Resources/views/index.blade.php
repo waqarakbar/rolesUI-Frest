@@ -399,6 +399,7 @@
     </div>
 
     @extends('vms::visitor/modal');
+
 @endsection
 
 @push('scripts')

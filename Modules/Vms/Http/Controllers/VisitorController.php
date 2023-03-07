@@ -15,7 +15,6 @@ use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Session;
 
-
 use Hash;
 use Auth;
 
@@ -115,6 +114,7 @@ class VisitorController extends Controller
         ];
         return view('vms::visitor.epass', $data);
     }
+
 
 
 
@@ -251,6 +251,7 @@ class VisitorController extends Controller
         $visitor->update($request->all());
         // $qr = QrCode::size(100)->generate(base64_encode($visitor->qrcode ?? $visitor->id));
         return sendResponse($visitor);
+
     }
 
 

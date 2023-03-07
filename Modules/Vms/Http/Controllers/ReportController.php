@@ -2,7 +2,6 @@
 
 namespace Modules\Vms\Http\Controllers;
 
-
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Modules\Settings\Entities\Company;
