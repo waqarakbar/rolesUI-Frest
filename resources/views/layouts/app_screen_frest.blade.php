@@ -86,11 +86,7 @@
                 var label = $(this).html();
                 $(this).html(label+" <span class='starik' style='color:red;font-size:11px;'>*</span>");
             })
-
         });
-
-
-
     </script>
 </head>
 
@@ -103,8 +99,10 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
             <div class="app-brand demo">
-                <a href="index.html" class="app-brand-link">
-                    <span class="app-brand-text demo menu-text fw-bold ms-2">{{ env('APP_ABBR') }}</span>
+                <a href="{{route('home')}}" class="app-brand-link">
+                    <span class="app-brand-text demo menu-text fw-bold ms-2">
+                        <img src="{{asset('assets/site-images/logo.png')}}" width="150">
+                    </span>
                 </a>
 
                 {{--<a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -252,6 +250,7 @@
                         <!-- /Search -->
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
+                        {{--
                             <!-- Language -->
                             <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -357,7 +356,7 @@
                             <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
                               <i class="bx bx-pie-chart-alt-2 fs-4"></i>
                             </span>
-                                                <a href="index.html" class="stretched-link">Dashboard</a>
+                                                <a href="{{route('home')}}" class="stretched-link">Dashboard</a>
                                                 <small class="text-muted mb-0">User Profile</small>
                                             </div>
                                             <div class="dropdown-shortcuts-item col">
@@ -631,26 +630,28 @@
                                 </ul>
                             </li>
                             <!--/ Notification -->
-
+                            --}}
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="rounded-circle" />
+                                        <i class="fa fa-user fa-2x"></i>
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                                        <a class="dropdown-item" href="javascript:;">
                                             <div class="d-flex">
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
-                                                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="rounded-circle" />
+                                                        <div class="avatar avatar-online">
+                                                            <i class="fa fa-user fa-2x"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-semibold d-block lh-1">John Doe</span>
-                                                    <small>Admin</small>
+                                                    <span class="fw-semibold d-block lh-1">{{auth()->user()->name}}</span>
+{{--                                                    <small>Admin</small>--}}
                                                 </div>
                                             </div>
                                         </a>
@@ -660,13 +661,13 @@
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages-profile-user.html">
+                                        <a class="dropdown-item" href="{{route('settings.users-mgt.my-profile')}}">
                                             <i class="bx bx-user me-2"></i>
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                                        <a class="dropdown-item" href="{{route('settings.users-mgt.change-password')}}">
                                             <i class="bx bx-cog me-2"></i>
                                             <span class="align-middle">Change Password</span>
                                         </a>
@@ -792,13 +793,12 @@
                 <!-- / Content -->
 
                 <!-- Footer -->
-                <footer class="content-footer footer bg-footer-theme">
-                    <div class="container-fluid d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <footer class="content-footer footer bg-footer-theme bottom-border-line">
+                    <div class="container-fluid d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
                         <div class="mb-2 mb-md-0">
-                            © {{ date('Y') }}, made with ❤️ by
-                            <a href="" target="_blank" class="footer-link fw-semibold">TECHIES</a>
+                            <h3 class="text-center an-initiative-on">An Initiative of</h3>
+                            <img src="{{asset('assets/site-images/logo-bottom.png')}}" width="300"/>
                         </div>
-
                     </div>
                 </footer>
                 <!-- / Footer -->
