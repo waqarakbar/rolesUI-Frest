@@ -203,10 +203,7 @@ class VisitorController extends Controller
     {
         $gate = Gate::get();
         $department =  Company::get();
-
         $vehcilemanufacturer = VehcileManufacturer::get();
-
-
         $visitor = Visitor::with(['user', 'department', 'gate'])->has('user')->has('department')->findorfail($id);
         return view('vms::visitor.edit', compact('visitor', 'gate', 'department', 'vehcilemanufacturer'));
     }
@@ -215,7 +212,6 @@ class VisitorController extends Controller
     {
 
         $model = Visitor::findorfail($id);
-        $data = $request->all();
         $visitordata = [
             'department_id' => $request->department_id,
             'gate_id' => $request->gate_id,
@@ -227,12 +223,13 @@ class VisitorController extends Controller
             'email' => $request->cnic,
             'mobile' => $request->mobile,
         ];
+
         $model->fill($visitordata);
         $model->save();
-        $user = User::where('id', $request->user_id)->first();
+        $user = VisitorRegistration::where('id', $request->user_id)->first();
         $user->fill($userdata);
         $user->save();
-        Alert::toast('The visitor updated Successfully', 'success')->timerProgressBar();
+        Session::flash('success', 'The visitor updated Successfully');
         return redirect()->route('visitors.index');
     }
     /**
@@ -245,15 +242,14 @@ class VisitorController extends Controller
     public function update(Request $request, Visitor $visitor)
     {
 
-        //     if($request->has('status')){
-
-        $visitor->update([
-            'rejected_reason' => $request->rejected_reason,
-            'visiting_date' => $request->visiting_date,
-            'visiting_time' => $request->visiting_time,
-            'status' => $request->status,
-        ]);
-        $qr = QrCode::size(100)->generate(base64_encode($visitor->qrcode ?? $visitor->id));
+        // $visitor->update([
+        //     'rejected_reason' => $request->rejected_reason,
+        //     'visiting_date' => $request->visiting_date,
+        //     'visiting_time' => $request->visiting_time,
+        //     'status' => $request->status,
+        // ]);
+        $visitor->update($request->all());
+        // $qr = QrCode::size(100)->generate(base64_encode($visitor->qrcode ?? $visitor->id));
         return sendResponse($visitor);
     }
 

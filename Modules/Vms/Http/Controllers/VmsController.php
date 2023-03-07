@@ -15,10 +15,7 @@ class VmsController extends Controller
 {
 
 
-    public function register()
-    {
-        return view('vms::auth.register');
-    }
+
     /**
      * Display a listing of the resource.
      * @return Renderable
@@ -26,7 +23,6 @@ class VmsController extends Controller
 
     public function CurrentYearData($status = 0)
     {
-
         if ($status == 0) {
             return Visitor::query()->count() ?? 0;
         }
@@ -42,7 +38,6 @@ class VmsController extends Controller
         $total = Visitor::query()->count();
 
 
-
         // get Current Year Info/
 
         $current_year_data = [
@@ -51,6 +46,9 @@ class VmsController extends Controller
             'accept' =>  $this->CurrentYearData(3),
             'visited' => $this->CurrentYearData(1),
             'total'  => $this->CurrentYearData(0),
+            'source_WEB' => Visitor::query()->where('data_source', 'web')->count(),
+            'source_API' => Visitor::query()->where('data_source', 'API')->count(),
+            'source_CallCenter' => Visitor::query()->where('data_source', 'call_center')->count(),
         ];
 
         $data = [
@@ -60,7 +58,8 @@ class VmsController extends Controller
             'accept' => $accept,
             'visited' => $visited,
             'total' => $total,
-            'current_year_data' => $current_year_data
+            'current_year_data' => $current_year_data,
+
         ];
         return view('vms::index', $data);
     }

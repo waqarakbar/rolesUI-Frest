@@ -23,13 +23,16 @@ class RegisterController extends Controller
     */
 
     use RegistersUsers;
+    protected $registerView = 'vms::auth.register';
+
 
     /**
      * Where to redirect users after registration.
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = 'vms/visitor/dashboard';
 
     /**
      * Create a new controller instance.
@@ -39,6 +42,11 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showRegistrationForm()
+    {
+        return view('vms::auth.register');
     }
 
     /**
@@ -51,7 +59,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'cnic' => ['required', 'string', 'max:255', 'unique:users'],
+            'cnic' => ['required', 'string', 'max:255', 'unique:vms.users'],
             'mobile' => ['required', 'max:11',],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);

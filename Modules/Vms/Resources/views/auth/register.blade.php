@@ -52,90 +52,168 @@
     <div class="authentication-wrapper authentication-cover">
         <div class="authentication-inner row m-0">
 
-            <!-- /Left Text -->
-            <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center">
-                <div class="flex-row text-center mx-auto">
-                    <img src="" alt="Auth Cover Bg color" width="520" class="img-fluid authentication-cover-img" data-app-light-img="pages/register-light.png" data-app-dark-img="pages/register-dark.png">
-                    <div class="mx-auto">
-                        <h3>A few clicks to get started 🚀</h3>
-                        <p>
-                            Let’s get started with your 14 days free trial and <br> start building your application today.
-                        </p>
-                    </div>
+            <!-- Left Text -->
+            <div class="d-none d-lg-flex col-lg-4 align-items-center justify-content-end p-5 pe-0">
+                <div class="w-px-400">
+                    <img src="" class="img-fluid scaleX-n1-rtl" alt="multi-steps" width="600" data-app-light-img="illustrations/create-account-light.png" data-app-dark-img="illustrations/create-account-dark.png">
                 </div>
             </div>
             <!-- /Left Text -->
 
-            <!-- Register -->
-            <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4">
-                <div class="w-px-400 mx-auto">
+            <!--  Multi Steps Registration -->
+            <div class="d-flex col-lg-8 authentication-bg p-sm-5 p-3 justify-content-center">
+                <div class="d-flex flex-column w-px-700">
                     <!-- Logo -->
-                    <div class="app-brand mb-4">
-                        <a href="{{url('/')}}" class="app-brand-link gap-2 mb-2">
-                          
-                            <span class="app-brand-text demo h3 mb-0 fw-bold">{{config('variables.templateName')}}</span>
+
+
+                    <div class="app-brand justify-content-center">
+                        <a href="/" class="app-brand-link gap-2">
+                            <span class="app-brand-text demo h3 mb-0 fw-bold">
+                                <img src="{{asset('assets/img/vms_logo.png')}}" width="230">
+                            </span>
                         </a>
                     </div>
                     <!-- /Logo -->
-                    <h4 class="mb-2">Adventure starts here 🚀</h4>
-                    <p class="mb-4">Make your app management easy and fun!</p>
 
-                    <form id="formAuthentication" class="mb-3" action="{{url('/')}}" method="GET">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="Enter your username" autofocus>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email">
-                        </div>
-                        <div class="mb-3 form-password-toggle">
-                            <label class="form-label" for="password">Password</label>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
-                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                    <div class="my-auto">
+                        <div class="main_div_for_register">
+                            <div class="transparent_div">
+
+                                <form method="POST" action="{{ route('visitor.register') }}">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-md-3 mx-auto my-3">
+                                            <img src="{{ asset('assets/img/cardimg.png') }}" class="img-fluid" alt="">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="row mb-3">
+
+                                                <div class="col-md-6">
+                                                    <strong>Full name</strong>
+
+                                                    <input id="name" type="text" placeholder="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                                    @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <strong>Cnic #</strong>
+
+                                                    <input id="cnic" type="text" class="form-control @error('cnic') is-invalid @enderror" placeholder="cnic" name="cnic" required autocomplete="new-cnic">
+
+                                                    @error('cnic')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <strong>Mobile</strong>
+
+                                                    <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" placeholder="phone" name="mobile">
+
+                                                    @error('mobile')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <strong>Password</strong>
+
+                                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="password" name="password" required autocomplete="new-password">
+
+                                                    @error('password')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row mb-5">
+                                                <div class="col-md-12">
+                                                    <strong> Confirm Password</strong>
+
+                                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-4">
+                                            <div id="my_camera"></div>
+                                            <input type=button class="btn btn-block bt-sm btn-primary" value="Profile" onClick="take_snapshot()">
+                                            <input type="file" name="profile" class="form-control mt-2">
+                                            <div id="results"></div>
+                                            <input type="hidden" name="profile" id="profile">
+                                        </div>
+
+                                        <div class="col-xs-6 col-sm-6 col-md-4">
+                                            <div id="my_camera1"></div>
+                                            <input type="button" class="btn btn-block bt-sm btn-primary" value="Cnic Front" onClick="take_snapshot1()">
+                                            <input type="file" name="cnic_front" class="form-control mt-2">
+                                            <div id="results1">
+                                            </div>
+                                            <input type="hidden" name="cnic_front" id="cnic_front">
+                                        </div>
+
+                                        <div class="col-xs-6 coll-sm-6 col-md-4">
+
+                                            <div id="my_camera2"></div>
+                                            <input type="button" class="btn btn-block bt-sm btn-primary" value="Cnic Back" onClick="take_snapshot2()">
+                                            <input type="file" name="cnic_back" class="form-control mt-2">
+                                            <div id="results2">
+                                            </div>
+                                            <input type="hidden" name="cnic_back" id="cnic_back">
+                                        </div>
+                                    </div>
+
+
+
+
+
+
+                                    <div class="row">
+                                        <div class="col-md-4 mx-auto my-5">
+                                            <button type="submit" class="btn btn-block btn-primary">
+                                                {{ __('Register') }}
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </form>
                             </div>
                         </div>
 
-                        <div class="mb-3">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms">
-                                <label class="form-check-label" for="terms-conditions">
-                                    I agree to
-                                    <a href="javascript:void(0);">privacy policy & terms</a>
-                                </label>
+                        <footer class="content-footer footer bg-footer-theme mt-4">
+                            <div class="container-xxl d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column mb-2 mb-md-0">
+                                <div class="mb-2 mb-md-0">
+                                    <h3 class="text-center an-initiative-on">An Initiative of</h3>
+                                    <img src="{{asset('assets/site-images/logo-bottom.png')}}" width="300" />
+                                </div>
+
                             </div>
-                        </div>
-                        <button class="btn btn-primary d-grid w-100">Sign up</button>
-                    </form>
-
-                    <p class="text-center">
-                        <span>Already have an account?</span>
-                        <a href="{{url('auth/login-cover')}}">
-                            <span>Sign in instead</span>
-                        </a>
-                    </p>
-
-                    <div class="divider my-4">
-                        <div class="divider-text">or</div>
-                    </div>
-
-                    <div class="d-flex justify-content-center">
-                        <a href="javascript:;" class="btn btn-icon btn-label-facebook me-3">
-                            <i class="tf-icons bx bxl-facebook"></i>
-                        </a>
-
-                        <a href="javascript:;" class="btn btn-icon btn-label-google-plus me-3">
-                            <i class="tf-icons bx bxl-google-plus"></i>
-                        </a>
-
-                        <a href="javascript:;" class="btn btn-icon btn-label-twitter">
-                            <i class="tf-icons bx bxl-twitter"></i>
-                        </a>
+                        </footer>
                     </div>
                 </div>
             </div>
-            <!-- /Register -->
+            <!-- / Multi Steps Registration -->
         </div>
     </div>
 
@@ -166,6 +244,66 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
+
+
+    <script type="text/javascript" src="{{ asset('assets/vendor/webcamjs/webcam.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/vendor/instascan/instascan.min.js') }}"></script>
+    <!-- Configure a few settings and attach camera -->
+    <script language="JavaScript">
+        Webcam.set({
+            width: 150,
+            height: 150,
+            image_format: 'jpg',
+            jpeg_quality: 100
+        });
+        Webcam.attach('#my_camera');
+        Webcam.attach('#my_camera1');
+        Webcam.attach('#my_camera2');
+    </script>
+    <!-- A button for taking snaps -->
+
+    <!-- Code to handle taking the snapshot and displaying it locally -->
+    <script language="JavaScript">
+        function take_snapshot() {
+
+            // take snapshot and get image data
+            Webcam.snap(function(data_uri) {
+                // display results in page
+                document.getElementById('results').innerHTML =
+                    '<img src="' + data_uri + '" />';
+
+                $('#profile').val(data_uri);
+
+
+            });
+        }
+
+        function take_snapshot1() {
+
+            // take snapshot and get image data
+            Webcam.snap(function(data_uri) {
+                // display results in page
+                document.getElementById('results1').innerHTML =
+                    '<img src="' + data_uri + '"  />';
+                $('#cnic_front').val(data_uri);
+
+
+            });
+        }
+
+        function take_snapshot2() {
+
+            // take snapshot and get image data
+            Webcam.snap(function(data_uri) {
+                // display results in page
+                document.getElementById('results2').innerHTML =
+                    '<img src="' + data_uri + '" name="cnic_back"/>';
+
+                $('#cnic_back').val(data_uri);
+
+            });
+        }
+    </script>
 </body>
 
 </html>

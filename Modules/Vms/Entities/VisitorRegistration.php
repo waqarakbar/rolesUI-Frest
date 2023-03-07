@@ -8,11 +8,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\HasMedia;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class VisitorRegistration extends Model implements HasMedia 
+class VisitorRegistration extends Authenticatable implements HasMedia 
 {
 
-    use HasFactory, SoftDeletes, InteractsWithMedia;
+    use HasFactory, SoftDeletes, InteractsWithMedia,HasApiTokens, Notifiable;
     protected $connection = "vms";
     protected $table = 'users';
     /**

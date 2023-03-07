@@ -3,109 +3,105 @@
 
 
 @push('stylesheets')
-<link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 @endpush
 
 
 
 
 @section('content')
-<div class="row">
-    <!-- Gamification Card -->
-    <div class="col-lg-4 col-md-6 col-12 mb-4">
-        <div class="card h-100">
-            <div class="card-header">
-                <h3 class="card-title mb-2">Total Visitors!</h3>
-                <!-- <span class="d-block mb-4 text-nowrap">Best seller of the month</span> -->
-            </div>
-            <div class="card-body">
-                <div class="row align-items-end">
-                    <div class="col-6">
-                        <h1 class="display-6 text-primary mb-2 pt-4 pb-1">{{$total}}</h1>
-                        <small class="d-block mb-3">You have done 57.6% <br>more sales today.</small>
-
-                        <!-- <a href="javascript:;" class="btn btn-sm btn-primary">View sales</a> -->
-                    </div>
-                    <!-- <div class="col-6">
-                        <img src="" width="140" height="150" class="rounded-start" alt="View Sales" data-app-light-img="illustrations/prize-light.png" data-app-dark-img="illustrations/prize-dark.png">
-                    </div> -->
+    <div class="row">
+        <!-- Gamification Card -->
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
+            <div class="card h-100">
+                <div class="card-header">
+                    <h3 class="card-title mb-2">Total Visitors!</h3>
+                    <!-- <span class="d-block mb-4 text-nowrap">Best seller of the month</span> -->
                 </div>
-            </div>
-        </div>
-    </div>
-    <!--/ Gamification Card -->
+                <div class="card-body">
+                    <div class="row align-items-end">
+                        <div class="col-6">
+                            <h1 class="display-6 text-primary mb-2 pt-4 pb-1">{{ $total }}</h1>
+                            <!-- <small class="d-block mb-3">You have done 57.6% <br>more sales today.</small>
 
-    <!-- Multi Radial Chart -->
-    <div class="col-lg-4 col-md-6 col-12 mb-4">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0">Visits of 2022</h5>
-                <div class="dropdown">
-                    <button class="btn p-0" type="button" id="visitsOptions" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="visitsOptions">
-                        <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div id="visitsRadialChart"></div>
-            </div>
-        </div>
-    </div>
-    <!--/ Multi Radial Chart -->
-
-    <!-- Statistics cards & Revenue Growth Chart -->
-    <div class="col-lg-4 col-12">
-        <div class="row">
-            <!-- Statistics Cards -->
-            <div class="col-6 col-md-3 col-lg-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <div class="avatar mx-auto mb-2">
-                            <span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-user-check fs-4"></i></span>
+                                                                                                                                                                                                                                                    <a href="javascript:;" class="btn btn-sm btn-primary">APP</a> -->
                         </div>
-                        <span class="d-block text-nowrap">Approved</span>
-                        <h2 class="mb-0">{{$accept + $visited}}</h2>
+                        <!-- <div class="col-6">
+                                                                                                                                                                                                                                                    <img src="" width="140" height="150" class="rounded-start" alt="View Sales" data-app-light-img="illustrations/prize-light.png" data-app-dark-img="illustrations/prize-dark.png">
+                                                                                                                                                                                                                                                </div> -->
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3 col-lg-6 mb-4">
-                <div class="card h-100">
-                    <div class="card-body text-center">
-                        <div class="avatar mx-auto mb-2">
-                            <span class="avatar-initial rounded-circle bg-label-danger"><i class="bx bx-x-circle fs-4"></i></span>
-                        </div>
-                        <span class="d-block text-nowrap">Rejected</span>
-                        <h2 class="mb-0">{{$reject}}</h2>
-                    </div>
-                </div>
-            </div>
-            <!--/ Statistics Cards -->
-            <!-- Revenue Growth Chart -->
-            <div class="col-12 col-md-6 col-lg-12 mb-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center pb-0">
-                        <h5 class="card-title mb-0">Revenue Growth</h5>
-                        <span>$25,980</span>
-                    </div>
-                    <div class="card-body pb-0">
-                        <div id="revenueGrowthChart"></div>
-                    </div>
-                </div>
-            </div>
-            <!--/ Revenue Growth Chart -->
         </div>
-    </div>
-    <!--/ Statistics cards & Revenue Growth Chart -->
+        <!--/ Gamification Card -->
 
-    <!-- Weekly Order Summary -->
-    {{-- <div class="col-xl-8 col-12 mb-4">
+        <!-- Multi Radial Chart -->
+        <div class="col-lg-4 col-md-6 col-12 mb-4">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Visits of {{ \Carbon\Carbon::now()->format('Y') }}</h5>
+
+                </div>
+                <div class="card-body">
+                    <div id="visitsRadialChart"></div>
+                </div>
+            </div>
+        </div>
+        <!--/ Multi Radial Chart -->
+
+        <!-- Statistics cards & Revenue Growth Chart -->
+        <div class="col-lg-4 col-12">
+            <div class="row">
+                <!-- Statistics Cards -->
+                <div class="col-6 col-md-3 col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="avatar mx-auto mb-2">
+                                <span class="avatar-initial rounded-circle bg-label-success"><i
+                                        class="bx bx-user-check fs-4"></i></span>
+                            </div>
+                            <span class="d-block text-nowrap">Approved</span>
+                            <h2 class="mb-0">{{ $accept + $visited }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3 col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="avatar mx-auto mb-2">
+                                <span class="avatar-initial rounded-circle bg-label-danger"><i
+                                        class="bx bx-x-circle fs-4"></i></span>
+                            </div>
+                            <span class="d-block text-nowrap">Rejected</span>
+                            <h2 class="mb-0">{{ $reject }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <!--/ Statistics Cards -->
+                <!-- Revenue Growth Chart -->
+                <div class="col-12 col-md-6 col-lg-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center pb-0">
+                            <h5 class="card-title mb-1">Visitor Requests </h5>
+                            <span class="avatar-initial"><i class="fa-brands fa-stack-overflow fa-3x"></i></span>
+                        </div>
+                        <div class="card-body pb-0">
+                            <div id="revenueGrowthChart">
+                            </div>
+                            <h4 class="text-center">{{ $requested }}</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <!--/ Revenue Growth Chart -->
+            </div>
+        </div>
+        <!--/ Statistics cards & Revenue Growth Chart -->
+
+        <!-- Weekly Order Summary -->
+        {{-- <div class="col-xl-8 col-12 mb-4">
         <div class="card">
             <div class="row row-bordered m-0">
                 <!-- Order Summary -->
@@ -180,10 +176,10 @@
             </div>
         </div>
     </div> --}}
-    <!--/ Weekly Order Summary -->
+        <!--/ Weekly Order Summary -->
 
-    <!-- Latest Update -->
-    {{-- <div class="col-md-6 col-lg-6 col-xl-4 col-xl-4 mb-4">
+        <!-- Latest Update -->
+        {{-- <div class="col-md-6 col-lg-6 col-xl-4 col-xl-4 mb-4">
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between mb-3">
                     <h5 class="card-title mb-0">Latest Update</h5>
@@ -257,10 +253,10 @@
                 </div>
             </div>
         </div> --}}
-    <!--/ Latest Update -->
+        <!--/ Latest Update -->
 
-    <!-- All Users -->
-    {{-- <div class="col-md-6 col-lg-6 col-xl-4 mb-4 mb-xl-0">
+        <!-- All Users -->
+        {{-- <div class="col-md-6 col-lg-6 col-xl-4 mb-4 mb-xl-0">
             <div class="card h-100">
                 <div class="card-header">
                     <h5 class="card-title mb-2">All Users</h5>
@@ -330,554 +326,293 @@
                 </div>
             </div>
         </div> --}}
-    <!--/ All Users -->
+        <!--/ All Users -->
 
-    <!-- Marketing Campaigns -->
-    <div class="col-xl-12">
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="card-title mb-0">Visitor List</h5>
-                <div class="dropdown">
-                    <button class="btn p-0" type="button" id="marketingOptions" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bx bx-dots-vertical-rounded"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="marketingOptions">
-                        <a class="dropdown-item" href="javascript:void(0);">Select All</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
-                        <a class="dropdown-item" href="javascript:void(0);">Share</a>
+        <!-- Marketing Campaigns -->
+        <div class="col-xl-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Visitor List</h5>
+                    <div class="dropdown">
+                        <button class="btn p-0" type="button" id="marketingOptions" data-bs-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="marketingOptions">
+                            <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                            <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="card-body">
-                <!-- <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
-                    <div class="d-flex justify-content-between align-content-center flex-wrap gap-4">
-                        <div class="d-flex align-items-center gap-2">
-                            <div id="marketingCampaignChart1"></div>
-                            <div>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-2">25,768</h6>
-                                    <span class="text-success">(+16.2%)</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="badge badge-dot bg-success me-2"></span> Jan 12,2022
-                                </div>
-                            </div>
-                        </div>
-                        <div class="d-flex align-items-center gap-2">
-                            <div id="marketingCampaignChart2"></div>
-                            <div>
-                                <div class="d-flex align-items-center">
-                                    <h6 class="mb-0 me-2">5,352</h6>
-                                    <span class="text-danger">(-4.9%)</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <span class="badge badge-dot bg-danger me-2"></span> Jan 12,2022
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="javascript:;" class="btn btn-sm btn-primary" type="button">View Report</a>
-                </div> -->
-            </div>
-            <div class="table-responsive p-2">
-                <table class="table border-top" id="last-page-dt">
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Cnic</th>
-                            <th>Status</th>
-                            <th>Purpose</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                    </tbody>
-                </table>
+                <div class="card-body">
+                    <!-- <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">
+                                                                                                                                                                                                                                                <div class="d-flex justify-content-between align-content-center flex-wrap gap-4">
+                                                                                                                                                                                                                                                    <div class="d-flex align-items-center gap-2">
+                                                                                                                                                                                                                                                        <div id="marketingCampaignChart1"></div>
+                                                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                                                            <div class="d-flex align-items-center">
+                                                                                                                                                                                                                                                                <h6 class="mb-0 me-2">25,768</h6>
+                                                                                                                                                                                                                                                                <span class="text-success">(+16.2%)</span>
+                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                            <div class="d-flex align-items-center">
+                                                                                                                                                                                                                                                                <span class="badge badge-dot bg-success me-2"></span> Jan 12,2022
+                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                    <div class="d-flex align-items-center gap-2">
+                                                                                                                                                                                                                                                        <div id="marketingCampaignChart2"></div>
+                                                                                                                                                                                                                                                        <div>
+                                                                                                                                                                                                                                                            <div class="d-flex align-items-center">
+                                                                                                                                                                                                                                                                <h6 class="mb-0 me-2">5,352</h6>
+                                                                                                                                                                                                                                                                <span class="text-danger">(-4.9%)</span>
+                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                            <div class="d-flex align-items-center">
+                                                                                                                                                                                                                                                                <span class="badge badge-dot bg-danger me-2"></span> Jan 12,2022
+                                                                                                                                                                                                                                                            </div>
+                                                                                                                                                                                                                                                        </div>
+                                                                                                                                                                                                                                                    </div>
+                                                                                                                                                                                                                                                </div>
+                                                                                                                                                                                                                                                <a href="javascript:;" class="btn btn-sm btn-primary" type="button">View Report</a>
+                                                                                                                                                                                                                                            </div> -->
+                </div>
+                <div class="table-responsive p-2">
+                    <table class="table border-top" id="last-page-dt">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>CNIC</th>
+                                <th>Visit To</th>
+                                <th>Purpose</th>
+                                <th width="23%">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-border-bottom-0">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        <!--/ Marketing Campaigns -->
     </div>
     <!--/ Marketing Campaigns -->
-</div>
+    </div>
+
+    @extends('vms::visitor/modal');
 @endsection
 
 @push('scripts')
-<script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-<!-- <script src="{{ asset('assets/js/dashboards-ecommerce.js') }}"></script> -->
+    <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
+    <!-- <script src="{{ asset('assets/js/dashboards-ecommerce.js') }}"></script> -->
 
-<script src="{{ asset('assets/vendor/libs/datatables/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-<script src="{{ asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js') }}"></script>
-<script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js') }}"></script>
 
 
+    <script>
+        $(document).ready(function() {
 
-<script>
-    $(document).ready(function() {
-
-        $('#last-page-dt').DataTable({
-            "pagingType": "full_numbers",
-            "language": {
-                "paginate": {
-                    "first": "<i class='las la-angle-double-left'></i>",
-                    "previous": "<i class='las la-angle-left'></i>",
-                    "next": "<i class='las la-angle-right'></i>",
-                    "last": "<i class='las la-angle-double-right'></i>"
-                }
-            },
-            "lengthMenu": [7, 14, 21, 28],
-            "pageLength": 7,
-            "ajax": "{{ route('visitors.index') }}",
-            "processing": true,
-            "serverSide": true,
-            "columns": [{
-                    data: 'user.name',
-                    name: 'user.name',
-                    orderable: false,
+            $('#last-page-dt').DataTable({
+                "pagingType": "full_numbers",
+                "language": {
+                    "paginate": {
+                        "first": "<i class='las la-angle-double-left'></i>",
+                        "previous": "<i class='las la-angle-left'></i>",
+                        "next": "<i class='las la-angle-right'></i>",
+                        "last": "<i class='las la-angle-double-right'></i>"
+                    }
                 },
+                "lengthMenu": [7, 14, 21, 28],
+                "pageLength": 7,
+                "ajax": "{{ route('visitors.index') }}?status=2,3",
+                "processing": true,
+                "serverSide": true,
+                "columns": [
 
-                {
-                    data: 'user.cnic',
-                    orderable: false,
-                },
+                    {
+                        data: 'user',
+                        name: 'user.name',
+                        orderable: false,
+                        render: function(data, type, row) {
+                            let profile = "";
+                            if (data?.profile_image_url) {
+                                profile = '<img src="' + data?.profile_image_url +
+                                    '" class = "me-3 rounded" width = "40"  alt = "' + data?.name +
+                                    '" >';
+                            }
+                            return profile + '' + data?.name;
+                        }
+                    },
 
-                {
-                    data: 'status',
-
-                },
-                {
-                    data: 'purpose',
-                    orderable: false,
-                },
+                    {
+                        data: 'user.cnic',
+                        orderable: false,
+                    },
 
 
-                {
-                    data: "action",
-                    orderable: false,
-                    searchable: false,
-                }
+                    {
+                        data: 'visit_to_name',
+                        orderable: false,
+                        searchable: false,
+                    },
+                    {
+                        data: 'purpose',
+                        orderable: false,
+                    },
 
-            ],
+
+
+                    {
+                        data: null,
+                        orderable: false,
+                        searchable: false,
+                        render: function(data, type, row) {
+                            let viewButton =
+                                `<button class ="btn btn-warning btn-sm showDetails"  data-model=` +
+                                encodeURIComponent(JSON.stringify(data)) +
+                                `><i class="bx bx-user"></i></button>`;
+                            let approveButton = data.status != 3 ?
+                                `<button class ="btn btn-success btn-sm accept_visitor"  data-id=` +
+                                data.id + `><i class="bx bx-check"></i></button>` : '';
+                            let rescheduleButton = data.status != 3 ?
+                                `<button class ="btn btn-primary btn-sm modalAction"  data-model=` +
+                                encodeURIComponent(JSON.stringify(data)) +
+                                `><i class="bx bx-stopwatch"></i></button>` : '';
+                            return viewButton + approveButton + rescheduleButton;
+                        }
+                    }
+
+                ],
+
+
+
+            });
+
+
 
 
 
         });
 
+        // dashboard script 
 
+        /**
+         * eCommerce Dashboard
+         */
 
+        'use strict';
+        (function() {
+            let cardColor, headingColor, axisColor, borderColor, shadeColor;
 
+            if (isDarkStyle) {
+                cardColor = config.colors_dark.cardColor;
+                headingColor = config.colors_dark.headingColor;
+                axisColor = config.colors_dark.axisColor;
+                borderColor = config.colors_dark.borderColor;
+                shadeColor = 'dark';
+            } else {
+                cardColor = config.colors.white;
+                headingColor = config.colors.headingColor;
+                axisColor = config.colors.axisColor;
+                borderColor = config.colors.borderColor;
+                shadeColor = 'light';
+            }
 
-    });
+            // Visits - Multi Radial Bar Chart
+            // --------------------------------------------------------------------
 
-    // dashboard script 
+            let visitor_data = JSON.parse('{!! json_encode($current_year_data) !!}');
+            const visitsRadialChartEl = document.querySelector('#visitsRadialChart'),
+                visitsRadialChartConfig = {
+                    chart: {
+                        height: 270,
+                        type: 'radialBar',
 
-    /**
-     * eCommerce Dashboard
-     */
-
-    'use strict';
-    (function() {
-        let cardColor, headingColor, axisColor, borderColor, shadeColor;
-
-        if (isDarkStyle) {
-            cardColor = config.colors_dark.cardColor;
-            headingColor = config.colors_dark.headingColor;
-            axisColor = config.colors_dark.axisColor;
-            borderColor = config.colors_dark.borderColor;
-            shadeColor = 'dark';
-        } else {
-            cardColor = config.colors.white;
-            headingColor = config.colors.headingColor;
-            axisColor = config.colors.axisColor;
-            borderColor = config.colors.borderColor;
-            shadeColor = 'light';
-        }
-
-        // Visits - Multi Radial Bar Chart
-        // --------------------------------------------------------------------
-
-        let current_year_data = JSON.parse('{!! json_encode($current_year_data) !!}');
-
-        console.log(current_year_data);
-        const visitsRadialChartEl = document.querySelector('#visitsRadialChart'),
-            visitsRadialChartConfig = {
-                chart: {
-                    height: 270,
-                    type: 'radialBar'
-                },
-                colors: [config.colors.primary, config.colors.danger, config.colors.warning],
-                series: [current_year_data?.total, current_year_data?.visited, current_year_data?.reject],
-                plotOptions: {
-                    radialBar: {
-                        offsetY: -10,
-                        hollow: {
-                            size: '45%'
-                        },
-                        track: {
-                            margin: 10,
-                            background: cardColor
-                        },
-                        dataLabels: {
-                            name: {
-                                fontSize: '15px',
-                                colors: [config.colors.secondary],
-                                fontFamily: 'IBM Plex Sans',
-                                offsetY: 25
+                    },
+                    colors: [config.colors.primary, config.colors.danger, config.colors.warning],
+                    series: [visitor_data?.source_WEB, visitor_data?.source_API, visitor_data?.source_CallCenter],
+                    plotOptions: {
+                        radialBar: {
+                            offsetY: -10,
+                            hollow: {
+                                size: '45%'
                             },
-                            value: {
-                                fontSize: '2rem',
-                                fontFamily: 'Rubik',
-                                fontWeight: 500,
-                                color: headingColor,
-                                offsetY: -15
+                            track: {
+                                margin: 10,
+                                background: cardColor
                             },
-                            total: {
-                                show: true,
-                                label: 'Total Visits',
-                                fontSize: '15px',
-                                fontWeight: 400,
-                                fontFamily: 'IBM Plex Sans',
-                                color: config.colors.secondary
+                            dataLabels: {
+                                name: {
+                                    fontSize: '15px',
+                                    colors: [config.colors.secondary],
+                                    fontFamily: 'IBM Plex Sans',
+                                    offsetY: 25,
+                                    formatter: function(value) {
+                                        return value.toString();
+                                    }
+                                },
+                                value: {
+                                    fontSize: '2rem',
+                                    fontFamily: 'Rubik',
+                                    fontWeight: 500,
+                                    color: headingColor,
+                                    offsetY: -15,
+                                    formatter: function(value) {
+                                        return value.toString();
+                                    }
+                                },
+
+                                total: {
+                                    show: true,
+                                    label: 'Total Visits',
+                                    fontSize: '15px',
+                                    fontWeight: 400,
+                                    fontFamily: 'IBM Plex Sans',
+                                    color: config.colors.secondary,
+                                    formatter: function(value, opt) {
+                                        // console.log(value);
+                                        return "Visitor";
+                                    }
+                                }
                             }
                         }
-                    }
-                },
-                grid: {
-                    padding: {
-                        top: -10,
-                        bottom: -10
-                    }
-                },
-                stroke: {
-                    lineCap: 'round'
-                },
-                labels: ['Total', 'Visited', 'Reject'],
-                legend: {
-                    show: true,
-                    position: 'bottom',
-                    horizontalAlign: 'center',
-                    labels: {
-                        colors: axisColor,
-                        useSeriesColors: false
                     },
-                    itemMargin: {
-                        horizontal: 15
+                    grid: {
+                        padding: {
+                            top: -10,
+                            bottom: -10
+                        }
                     },
-                    markers: {
-                        width: 10,
-                        height: 10,
-                        offsetX: -3
-                    }
-                }
-            };
-
-        if (typeof visitsRadialChartEl !== undefined && visitsRadialChartEl !== null) {
-            const visitsRadialChart = new ApexCharts(visitsRadialChartEl, visitsRadialChartConfig);
-            visitsRadialChart.render();
-        }
-
-        // Revenue Growth - Bar Chart
-        // --------------------------------------------------------------------
-        const revenueGrowthChartEl = document.querySelector('#revenueGrowthChart'),
-            revenueGrowthChartConfig = {
-                chart: {
-                    height: 90,
-                    type: 'bar',
-                    stacked: true,
-                    toolbar: {
-                        show: false
-                    }
-                },
-                grid: {
-                    show: false,
-                    padding: {
-                        left: 0,
-                        right: 0,
-                        top: -20,
-                        bottom: -20
-                    }
-                },
-                plotOptions: {
-                    bar: {
-                        horizontal: false,
-                        columnWidth: '20%',
-                        borderRadius: 2,
-                        startingShape: 'rounded',
-                        endingShape: 'flat'
-                    }
-                },
-                legend: {
-                    show: false
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                colors: [config.colors.info, config.colors_label.secondary],
-                series: [{
-                        name: '2020',
-                        data: [80, 60, 125, 40, 50, 30, 70, 80, 100, 40, 80, 60, 120, 75, 25, 135, 65]
+                    stroke: {
+                        lineCap: 'square'
                     },
-                    {
-                        name: '2021',
-                        data: [50, 65, 40, 100, 30, 30, 80, 20, 50, 45, 30, 90, 70, 40, 50, 40, 60]
-                    }
-                ],
-                xaxis: {
-                    categories: ['10', '', '', '', '', '', '', '', '15', '', '', '', '', '', '', '', '20'],
-                    axisBorder: {
-                        show: false
-                    },
-                    axisTicks: {
-                        show: false
-                    },
-                    labels: {
-                        style: {
-                            colors: axisColor
-                        },
-                        offsetY: -5
-                    }
-                },
-                yaxis: {
-                    show: false,
-                    floating: true
-                },
-                tooltip: {
-                    x: {
-                        show: false
-                    }
-                }
-            };
-        if (typeof revenueGrowthChartEl !== undefined && revenueGrowthChartEl !== null) {
-            const revenueGrowthChart = new ApexCharts(revenueGrowthChartEl, revenueGrowthChartConfig);
-            revenueGrowthChart.render();
-        }
-
-        // Order Summary - Area Chart
-        // --------------------------------------------------------------------
-        const orderSummaryEl = document.querySelector('#orderSummaryChart'),
-            orderSummaryConfig = {
-                chart: {
-                    height: 230,
-                    type: 'area',
-                    toolbar: false,
-                    dropShadow: {
-                        enabled: true,
-                        top: 18,
-                        left: 2,
-                        blur: 3,
-                        color: config.colors.primary,
-                        opacity: 0.15
-                    }
-                },
-                markers: {
-                    size: 6,
-                    colors: 'transparent',
-                    strokeColors: 'transparent',
-                    strokeWidth: 4,
-                    discrete: [{
-                        fillColor: cardColor,
-                        seriesIndex: 0,
-                        dataPointIndex: 9,
-                        strokeColor: config.colors.primary,
-                        strokeWidth: 4,
-                        size: 6,
-                        radius: 2
-                    }],
-                    hover: {
-                        size: 7
-                    }
-                },
-                series: [{
-                    data: [15, 18, 13, 19, 16, 31, 18, 26, 23, 39]
-                }],
-                dataLabels: {
-                    enabled: false
-                },
-                stroke: {
-                    curve: 'smooth',
-                    lineCap: 'round'
-                },
-                colors: [config.colors.primary],
-                fill: {
-                    type: 'gradient',
-                    gradient: {
-                        shade: shadeColor,
-                        shadeIntensity: 0.8,
-                        opacityFrom: 0.7,
-                        opacityTo: 0.25,
-                        stops: [0, 95, 100]
-                    }
-                },
-                grid: {
-                    show: true,
-                    borderColor: borderColor,
-                    padding: {
-                        top: -15,
-                        bottom: -10,
-                        left: 15,
-                        right: 10
-                    }
-                },
-                xaxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-                    labels: {
-                        offsetX: 0,
-                        style: {
+                    labels: ['On Spot', 'Mobile', 'Call Center'],
+                    legend: {
+                        show: true,
+                        position: 'bottom',
+                        horizontalAlign: 'center',
+                        labels: {
                             colors: axisColor,
-                            fontSize: '13px'
-                        }
-                    },
-                    axisBorder: {
-                        show: false
-                    },
-                    axisTicks: {
-                        show: false
-                    },
-                    lines: {
-                        show: false
-                    }
-                },
-                yaxis: {
-                    labels: {
-                        offsetX: 7,
-                        formatter: function(val) {
-                            return '$' + val;
+                            useSeriesColors: false,
                         },
-                        style: {
-                            fontSize: '13px',
-                            colors: axisColor
+                        itemMargin: {
+                            horizontal: 15
+                        },
+                        markers: {
+                            width: 10,
+                            height: 10,
+                            offsetX: -3
                         }
-                    },
-                    min: 0,
-                    max: 40,
-                    tickAmount: 4
-                }
-            };
-        if (typeof orderSummaryEl !== undefined && orderSummaryEl !== null) {
-            const orderSummary = new ApexCharts(orderSummaryEl, orderSummaryConfig);
-            orderSummary.render();
-        }
+                    }
+                };
 
-        // Marketing Campaign - Donut Chart 1
-        // --------------------------------------------------------------------
-        const marketingCampaignChart1El = document.querySelector('#marketingCampaignChart1'),
-            marketingCampaignChart1Config = {
-                chart: {
-                    height: 55,
-                    width: 55,
-                    fontFamily: 'IBM Plex Sans',
-                    type: 'donut'
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                grid: {
-                    padding: {
-                        top: -5,
-                        bottom: -5,
-                        left: -2,
-                        right: 0
-                    }
-                },
-                series: [60, 45, 60],
-                stroke: {
-                    width: 3,
-                    lineCap: 'round',
-                    colors: cardColor
-                },
-                colors: [config.colors.primary, config.colors.warning, config.colors.success],
-                plotOptions: {
-                    pie: {
-                        donut: {
-                            size: '65%',
-                            labels: {
-                                show: false,
-                                value: {
-                                    show: false
-                                },
-                                total: {
-                                    show: false
-                                }
-                            }
-                        }
-                    }
-                },
-                legend: {
-                    show: false
-                },
-                states: {
-                    active: {
-                        filter: {
-                            type: 'none'
-                        }
-                    }
-                }
-            };
+            if (typeof visitsRadialChartEl !== undefined && visitsRadialChartEl !== null) {
+                const visitsRadialChart = new ApexCharts(visitsRadialChartEl, visitsRadialChartConfig);
+                visitsRadialChart.render();
+            }
 
-        if (typeof marketingCampaignChart1El !== undefined && marketingCampaignChart1El !== null) {
-            const marketingCampaignChart1 = new ApexCharts(marketingCampaignChart1El, marketingCampaignChart1Config);
-            marketingCampaignChart1.render();
-        }
-
-        // Marketing Campaign - Donut Chart 2
-        // --------------------------------------------------------------------
-        const marketingCampaignChart2El = document.querySelector('#marketingCampaignChart2'),
-            marketingCampaignChart2Config = {
-                chart: {
-                    height: 55,
-                    width: 55,
-                    fontFamily: 'IBM Plex Sans',
-                    type: 'donut'
-                },
-                dataLabels: {
-                    enabled: false
-                },
-                grid: {
-                    padding: {
-                        top: -5,
-                        bottom: -5,
-                        left: -2,
-                        right: 0
-                    }
-                },
-                series: [60, 30, 30],
-                stroke: {
-                    width: 3,
-                    lineCap: 'round',
-                    colors: cardColor
-                },
-                colors: [config.colors.danger, config.colors.secondary, config.colors.primary],
-                plotOptions: {
-                    pie: {
-                        donut: {
-                            size: '65%',
-                            labels: {
-                                show: false,
-                                value: {
-                                    show: false
-                                },
-                                total: {
-                                    show: false
-                                }
-                            }
-                        }
-                    }
-                },
-                legend: {
-                    show: false
-                },
-                states: {
-                    active: {
-                        filter: {
-                            type: 'none'
-                        }
-                    }
-                }
-            };
-
-        if (typeof marketingCampaignChart2El !== undefined && marketingCampaignChart2El !== null) {
-            const marketingCampaignChart2 = new ApexCharts(marketingCampaignChart2El, marketingCampaignChart2Config);
-            marketingCampaignChart2.render();
-        }
-    })();
-</script>
+        })();
+    </script>
 @endpush
