@@ -34,29 +34,35 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Department</th>
-                                        <th>Total Employees</th>
-                                        <th>Mobile (Pending)</th>
-                                        <th>Picture (Pending)</th>
-                                       {{-- <th>Update Pending</th>--}}
-                                        <th>Completed</th>
+                                        <th>P.No</th>
+                                        <th>CNIC</th>
+                                        <th>Name</th>
+                                        <th>Father Name</th>
+                                        <th>Designation</th>
+                                        <th>BPS</th>
+                                        <th>Photo</th>
                                     </tr>
                                     </thead>
 
                                     <tbody>
-                                    @foreach($departments as $item)
+                                    @foreach($emps as $e)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $e->personnel_no }}</td>
+                                            <td>{{ $e->cnic }}</td>
+                                            <td>{{ $e->employee_name }}</td>
+                                            <td>{{ $e->father_name }}</td>
+                                            <td>{{ $e->designation }}</td>
+                                            <td>{{ $e->bps }}</td>
                                             <td>
-                                                <a href="{{ route('eidentity.employee.report-department-wise-list', ['id' => \Illuminate\Support\Facades\Crypt::encrypt($item->id)]) }}" target="_blank">
-                                                    <strong>{{ $item->title }}</strong>
-                                                </a>
+                                                @if(!checkNullAndEmpty($e->profile_picture))
+                                                    <a href="{{asset("storage/eidentity/$e->profile_picture")}}" target="_blank">
+                                                        <img width="50" src="{{asset("storage/eidentity/$e->profile_picture")}}">
+                                                    </a>
+                                                @else
+                                                    -
+                                                @endif
                                             </td>
-                                            <td>{{ $item->employees_count }}</td>
-                                            {{--<td>{{ $item->pending_update }}</td>--}}
-                                            <td>{{ $item->pending_mobile }}</td>
-                                            <td>{{ $item->pending_profile_pic }}</td>
-                                            <td>{{ ($item->employees_count - $item->pending_update) }}</td>
                                         </tr>
                                     @endforeach
                                     </tbody>

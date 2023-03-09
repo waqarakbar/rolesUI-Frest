@@ -26,6 +26,9 @@ Route::prefix('eidentity')->middleware(['auth'])->group(function() {
 
         Route::prefix('reports')->group(function (){
             Route::get('/department-wise', 'EIdentityController@departmentWiseReport')->name('eidentity.employee.report-departmentwise');
+
+            Route::get('/department-wise-list/{id}', 'EIdentityController@departmentWiseListReport')->name('eidentity.employee.report-department-wise-list');
+
         });
 
     });

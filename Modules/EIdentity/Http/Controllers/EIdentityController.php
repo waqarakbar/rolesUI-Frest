@@ -2,6 +2,7 @@
 
 namespace Modules\EIdentity\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -313,7 +314,7 @@ class EIdentityController extends Controller
 
     public function departmentWiseReport(Request $request){
 
-        $departments = Company::query()
+        /*$departments = Company::query()
             ->where('id','>',1)
             ->withCount([
                 'employees'=>function($q){
@@ -329,7 +330,7 @@ class EIdentityController extends Controller
                 }
             ])->whereNotIn('id',[355, 354])
             ->whereNull('deleted_at')
-            ->get();
+            ->get();*/
 
         $sql = "SELECT
                 d.id,
@@ -361,6 +362,49 @@ class EIdentityController extends Controller
         ];
 
         return view('eidentity::reports.department-wise',$data);
+
+    }
+
+
+    public function departmentWiseListReport(Request $request, $id){
+
+        $department_id = Crypt::decrypt($id);
+        $department = Company::find($department_id);
+        // dd($department_id);
+
+        $department_users = User::where([
+            ['company_id', '=', $department_id]
+        ])->pluck('id');
+        // dd($department_users->toArray());
+
+        $sql = "SELECT
+                d.id,
+                d.title as title,
+                e.*
+                
+                from ".env('DB_DATABASE').".companies as d 
+                left join ".env('DB_DATABASE').".users as u on d.id = u.company_id
+                left join employees as e on u.id = e.user_id
+                
+                WHERE
+                u.id not in (2,354,355,356)
+                and d.id not in (353)
+                and e.deleted_at is null
+                and e.user_id in (".implode(",", $department_users->toArray()).")
+                
+                
+                ORDER by d.title asc";
+
+        $emps = DB::connection('eidentity')->select($sql);
+
+        //pr($departments->toArray(),true);
+        $data = [
+            'title'=>'Department Wise Report List ('.$department->title.')',
+            'emps'=>$emps,
+
+        ];
+
+        return view('eidentity::reports.department-wise-list',$data);
 
     }
 }
