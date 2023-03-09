@@ -57,11 +57,13 @@ class VisitorController extends Controller
      */
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             $modelData = Visitor::query()->with(['user', 'department'])->has('user');
             $modelData->when($request->has('status'), function ($q) use ($request) {
                 return $q->whereIn('status', explode(",", $request->status));
             });
+
             //query For Gate Status 
             $modelData->when(Auth::user()->hasRole('Computer operator'), function ($q) {
                 return $q->where('creator_id', Auth::User()->id);
@@ -90,6 +92,7 @@ class VisitorController extends Controller
      */
     public function create()
     {
+
         $data = [
             'title' => 'Create New Visitor',
             'gate' => Gate::get(),
@@ -104,10 +107,12 @@ class VisitorController extends Controller
     {
         $data = [
             'title' => 'Epass Visitor',
+
             'gate' => Gate::get(),
         ];
         return view('vms::visitor.epass', $data);
     }
+
 
 
 
@@ -244,6 +249,7 @@ class VisitorController extends Controller
         $visitor->update($request->all());
         // $qr = QrCode::size(100)->generate(base64_encode($visitor->qrcode ?? $visitor->id));
         return sendResponse($visitor);
+
     }
 
 

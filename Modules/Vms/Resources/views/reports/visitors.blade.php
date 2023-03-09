@@ -4,6 +4,7 @@
 @section('title', 'Visitor Reports')
 
 @section('content')
+
     <style>
         .styleabc {
             overflow: auto;
@@ -162,3 +163,4 @@
         });
     </script>
 @endpush
+

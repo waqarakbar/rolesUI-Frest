@@ -17,12 +17,12 @@ yarn-error.log
 **/.DS_Store
 
 .composer
-/storage/logs/
-/storage/framework/cache/
-/storage/framework/cache/data/
-/storage/framework/sessions/
-/storage/framework/views/
-/storage/debugbar/
-/public/assets/uploads
-/public/uploads
-/uploads
+/storage/logs/*
+/storage/framework/cache/*
+/storage/framework/cache/data/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/debugbar/*
+/public/assets/uploads/*
+/public/uploads/*
+/uploads/*

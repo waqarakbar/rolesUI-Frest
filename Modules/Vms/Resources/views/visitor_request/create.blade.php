@@ -5,6 +5,7 @@
 @section('title', 'Create Visitor')
 @section('content')
 
+
     <div class="row">
         <div class="col-12">
 
@@ -136,10 +137,12 @@
                                 </div>
                                 {!! Form::close() !!}
 
+
                             </div>
                         </div>
                     </div>
                 </div>
+
 
 
             </div>
@@ -151,6 +154,7 @@
 @endsection
 
 @push('stylesheets')
+
     <style type="text/css">
         .qrcode {
             font-size: 16px;
@@ -164,8 +168,10 @@
             border-radius: 7px;
         }
     </style>
+
 @endpush
 @push('scripts')
+
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
@@ -192,4 +198,6 @@
 
         });
     </script>
+
 @endpush
+

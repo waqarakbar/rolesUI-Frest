@@ -17,6 +17,7 @@ class DashboardController extends Controller
     public function dashboard(Request $request)
     {
 
+
         $visitorQuery=Visitor::query();
 
         // if(auth()->user()->hasRole('Department')||auth()->user()->hasRole('Super Admin'))

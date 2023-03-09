@@ -3,6 +3,7 @@
 
 
 @section('content')
+
     <div>
         <!--  Navbar Ends / Breadcrumb Area  -->
         <!-- Main Body Starts -->
@@ -223,3 +224,4 @@
         });
     </script>
 @endpush
+

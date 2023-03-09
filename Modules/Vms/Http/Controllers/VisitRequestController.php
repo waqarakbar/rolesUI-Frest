@@ -2,6 +2,7 @@
 
 namespace Modules\Vms\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
@@ -26,6 +27,7 @@ class VisitRequestController extends Controller
     //     $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
     //     $this->middleware('permission:request-delete', ['only' => ['destroy']]);
     // }
+
     /**
      * Display a listing of the resource.
      *
@@ -51,6 +53,7 @@ class VisitRequestController extends Controller
                 return customButton($row,  'request', 'visit', true);
             })->rawColumns(['action'])->toJson();
 
+
         }
         $requested = Visitor::query()->where(['status' => 2,'department_id'=>auth()->user()->company_id])->count();
         $reject = Visitor::query()->where(['status' => 4,'department_id'=>auth()->user()->company_id])->count();
@@ -68,6 +71,7 @@ class VisitRequestController extends Controller
         ];
 
         return view('vms::visitor_request.index',$data );
+
     }
     /**
      * Show the form for creating a new resource.
@@ -76,6 +80,7 @@ class VisitRequestController extends Controller
      */
     public function create()
     {
+
         $department = Company::get();
         $vehcilemanufacturer = VehcileManufacturer::get();
 
@@ -86,6 +91,7 @@ class VisitRequestController extends Controller
         ];
 
         return view('vms::visitor_request.create',$data);
+
     }
 
     /**

@@ -2,6 +2,7 @@
 @php $app_id = config('vms.app_id') @endphp
 
 @section('content')
+
     <div class="row">
         <div class="col-12">
 
@@ -51,6 +52,8 @@
                                             ]) !!}
                                         </div>
                                     </div>
+
+
 
 
 
@@ -234,12 +237,15 @@
 
 
 
+
                                     {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+
                                                 <div class="form-group">
                                                     <strong>Role:</strong>
                                                     {!! Form::select('roles[]', $roles, [], ['class' => 'form-control', 'multiple']) !!}
                                                 </div>
                                             </div> --}}
+
                                     <div class="col-xs-12 col-sm-12 col-md-12 text-right">
                                         <button type="submit" class="btn btn-primary">Create</button>
                                     </div>
@@ -386,3 +392,4 @@
         });
     </script>
 @endpush
+

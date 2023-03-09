@@ -2,6 +2,7 @@
 @php $app_id = config('vms.app_id') @endphp
 
 
+
 @section('content')
     <div class="row ">
         <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
@@ -38,10 +39,12 @@
                             </div>
                         </div>
                         <div id="incomeChart"></div>
+
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
             <div class="card">
                 <div class="card-body">
@@ -114,10 +117,12 @@
                         </div>
                     </div>
 
+
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
 @push('stylesheets')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
@@ -137,6 +142,7 @@
     <script>
         $(document).ready(function() {
 
+
             $('#last-page-dt').DataTable({
                 "pagingType": "full_numbers",
                 "language": {
@@ -149,6 +155,7 @@
                 },
                 "lengthMenu": [7, 14, 21, 28],
                 "pageLength": 7,
+
                 "ajax": "{{ route('visit.index') }}",
                 "processing": true,
                 "serverSide": true,
@@ -171,11 +178,12 @@
 
                     {
                         data: 'user.cnic',
-                        orderable: false,
+                    orderable: false,
                     },
 
 
                     {
+
                         data: 'visit_to_name',
                         orderable: false,
                         searchable: false,
@@ -199,9 +207,12 @@
 
 
 
+
                     {
+
                         data: null,
                         orderable: false,
+
 
                     }
 
@@ -210,6 +221,8 @@
 
 
             });
+
+
 
 
 

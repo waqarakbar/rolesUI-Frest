@@ -16,6 +16,7 @@ class CheckRedirectVisitor
      */
     public function handle(Request $request, Closure $next)
     {
+
        if(auth()->guard('vms_user')->check()){
         return redirect()->route('visit.index');
 
@@ -25,3 +26,4 @@ class CheckRedirectVisitor
         return $next($request);
     }
 }
+

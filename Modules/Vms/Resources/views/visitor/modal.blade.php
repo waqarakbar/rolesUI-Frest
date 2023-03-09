@@ -16,6 +16,7 @@
             </div>
             <div class="modal-body">
                 <form id="modalSubmit">
+
                     <div class="form-group" id="">
 
 
@@ -30,6 +31,7 @@
 
                         <input type="date" id="visiting_date" class="form-control  " name="visiting_date">
                     </div>
+
 
 
                     <div class="form-group float-right pt-2">
@@ -107,13 +109,13 @@
                 let form = $("#modalSubmit");
                 let formData = form.serializeArray();
                 var token = $('input[name="_token"]').val();
+
                 let visitorid = $("#visitor_id").val();
                 // console.log(formData);
                 $.ajax({
                     url: `/vms/visitors/${visitorid}`,
                     type: 'PUT',
-                    // dataType: "JSON",
-                    data: formData,
+                     data: formData,
                     headers: {
                         'X-CSRF-Token': token
                     },

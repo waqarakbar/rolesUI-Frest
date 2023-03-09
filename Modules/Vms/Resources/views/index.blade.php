@@ -26,11 +26,13 @@
                             <h1 class="display-6 text-primary mb-2 pt-4 pb-1">{{ $total }}</h1>
                             <!-- <small class="d-block mb-3">You have done 57.6% <br>more sales today.</small>
 
+
                                                                                                                                                                                                                                                                                 <a href="javascript:;" class="btn btn-sm btn-primary">APP</a> -->
                         </div>
                         <!-- <div class="col-6">
                                                                                                                                                                                                                                                                                 <img src="" width="140" height="150" class="rounded-start" alt="View Sales" data-app-light-img="illustrations/prize-light.png" data-app-dark-img="illustrations/prize-dark.png">
                                                                                                                                                                                                                                                                             </div> -->
+
                     </div>
                 </div>
             </div>
@@ -74,7 +76,9 @@
                                 <span class="avatar-initial rounded-circle bg-label-danger"><i
                                         class="bx bx-x-circle fs-4"></i></span>
                             </div>
+
                             <span class="d-block text-nowrap">Re schedule</span>
+
                             <h2 class="mb-0">{{ $reject }}</h2>
                         </div>
                     </div>
@@ -102,7 +106,9 @@
 
         <!-- Weekly Order Summary -->
 
+
         <!--/ Weekly Order Summary -->
+
 
 
         <!-- Marketing Campaigns -->
@@ -123,7 +129,9 @@
                     </div>
                 </div>
                 <div class="card-body">
+
                     <!-- <div class="d-flex align-items-center justify-content-between flex-wrap gap-3">                                                                                                                                                                                                                                                      </div> -->
+
                 </div>
                 <div class="table-responsive p-2">
                     <table class="table border-top" id="last-page-dt">
@@ -133,8 +141,10 @@
                                 <th>CNIC</th>
                                 <th>Visit To</th>
                                 <th>Purpose</th>
+
                                 <th>Date</th>
                                 <th>Time</th>
+
 
 
                                 <th width="23%">Action</th>
@@ -152,6 +162,8 @@
     </div>
 
     @extends('vms::visitor/modal');
+
+
 @endsection
 
 @push('scripts')
@@ -162,7 +174,9 @@
     <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.js') }}"></script>
+
     <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
+
 
     <script>
         $(document).ready(function() {
@@ -179,7 +193,9 @@
                 },
                 "lengthMenu": [7, 14, 21, 28],
                 "pageLength": 7,
+
                 "ajax": "{{ route('visitors.index') }}?status=2",
+
                 "processing": true,
                 "serverSide": true,
                 "columns": [
@@ -214,6 +230,7 @@
                         data: 'purpose',
                         orderable: false,
                     },
+
                     {
                         data: 'visiting_date',
                         orderable: false,
@@ -225,6 +242,7 @@
                             return moment().format('hh:mm a');
                         }
                     },
+
 
 
 

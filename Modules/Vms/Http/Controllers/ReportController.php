@@ -66,4 +66,6 @@ class ReportController extends Controller
         ];
         return view('vms::reports.visitors', $data);
     }
+
 }
+
