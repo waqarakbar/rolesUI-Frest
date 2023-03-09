@@ -119,6 +119,13 @@
                         </div>
 
 
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" name="is_visitor_checked" value="1"
+                                       type="checkbox" id="is_visitor_checked"/>
+                                <label class="form-check-label" for="is_visitor_checked"> Are you Visitor? </label>
+                            </div>
+                        </div>
 {{--                        <div class="mb-3">--}}
 {{--                            <div class="form-check">--}}
 {{--                                <input class="form-check-input" type="checkbox" id="remember-me"/>--}}
