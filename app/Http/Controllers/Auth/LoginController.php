@@ -81,13 +81,17 @@ class LoginController extends Controller
         }
 
         //this for visitor login
-//        if($request->has('is_visitor_checked')){
-//            $credentials = $request->validate(['cnic' => ['required'],'password' => ['required']]);
-//            $credentials = ['cnic'=>$request->username, 'password'=>$request->password];
-//            if($auth = Auth::guard('vms_user')->attempt($credentials)){
-//                pr($auth);
-//            }
-//        }
+
+       if($request->has('is_visitor_checked')){
+           $credentials = $request->validate(['username' => ['required'],'password' => ['required']]);
+           $credentials = ['email'=>$request->username, 'password'=>$request->password];
+           if($auth = Auth::guard('vms_user')->attempt($credentials)){
+
+             dd(Auth::guard('vms_user')->user()->name);
+
+           }
+       }
+
 
 
 //        Session::flash('error', 'Invalid credentials, Please try again');

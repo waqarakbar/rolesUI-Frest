@@ -10,10 +10,12 @@ use Modules\Vms\Entities\Visitor;
 use Modules\Vms\Entities\Gate;
 use Modules\Settings\Entities\Company;
 use Modules\Vms\Entities\VehcileManufacturer;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Session;
+
 
 use Hash;
 use Auth;
@@ -58,7 +60,6 @@ class VisitorController extends Controller
 
         if ($request->ajax()) {
             $modelData = Visitor::query()->with(['user', 'department'])->has('user');
-
             $modelData->when($request->has('status'), function ($q) use ($request) {
                 return $q->whereIn('status', explode(",", $request->status));
             });
@@ -94,19 +95,16 @@ class VisitorController extends Controller
 
         $data = [
             'title' => 'Create New Visitor',
-            // 'back_route' => ['vms.visitors', 'Visitor List'],
-            // 'new_route' => ['vms.visitors.create', 'New Visitor'],
             'gate' => Gate::get(),
             'department' => Company::get(),
+            // 'user' => User::whereHas("roles", function($q){ $q->where("name", "Member"); })->get(),
             'vehcilemanufacturer' => VehcileManufacturer::get(),
         ];
+        //  dd($data);
         return view('vms::visitor.create', $data);
     }
-
-
     public function epass()
     {
-
         $data = [
             'title' => 'Epass Visitor',
 

@@ -7,3 +7,4 @@ return [
     'company_title' => 'Organization',
     'section_title' => 'Unit'
 ];
+
