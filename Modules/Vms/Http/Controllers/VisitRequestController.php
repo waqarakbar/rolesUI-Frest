@@ -1,13 +1,16 @@
 <?php
 
 namespace Modules\Vms\Http\Controllers;
-use App\Models\Visitor;
+
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
-use App\Models\User;
-use App\Models\Department;
-use App\Models\VehcileManufacturer;
+use Modules\Vms\Entities\VisitorRegistration;
+use Modules\Vms\Entities\Visitor;
+use Modules\Vms\Entities\Gate;
+use Modules\Settings\Entities\Company;
+use Modules\Vms\Entities\VehcileManufacturer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Hash;
@@ -24,7 +27,7 @@ class VisitRequestController extends Controller
     //     $this->middleware('permission:request-edit', ['only' => ['edit', 'update']]);
     //     $this->middleware('permission:request-delete', ['only' => ['destroy']]);
     // }
-    
+
     /**
      * Display a listing of the resource.
      *
@@ -39,6 +42,7 @@ class VisitRequestController extends Controller
     {
         if ($request->ajax()) {
             $modelData = Visitor::query()->where('user_id', Auth::User()->id)->with(['user', 'department']);
+
             //query For Department Role Status 
             $modelData->when($request->has('status'), function ($q) use ($request) {
                 return $q->whereIn('status', explode(",", $request->status));
@@ -48,8 +52,26 @@ class VisitRequestController extends Controller
             return Datatables::of($modelData)->addColumn('action', function ($row) {
                 return customButton($row,  'request', 'visit', true);
             })->rawColumns(['action'])->toJson();
+
+
         }
-        return view('vms::visitor_request.index');
+        $requested = Visitor::query()->where(['status' => 2,'department_id'=>auth()->user()->company_id])->count();
+        $reject = Visitor::query()->where(['status' => 4,'department_id'=>auth()->user()->company_id])->count();
+        $accept = Visitor::query()->where(['status' => 3,'department_id'=>auth()->user()->company_id])->count();
+        $visited = Visitor::query()->where(['status' => 1,'department_id'=>auth()->user()->company_id])->count();
+        $total = Visitor::query()->count();
+        $data = [
+            'title' => 'User Dashboard',
+            'requested' => $requested,
+            'reject' => $reject,
+            'accept' => $accept,
+            'visited' => $visited,
+            'total' => $total,
+
+        ];
+
+        return view('vms::visitor_request.index',$data );
+
     }
     /**
      * Show the form for creating a new resource.
@@ -58,10 +80,18 @@ class VisitRequestController extends Controller
      */
     public function create()
     {
-        $department = Department::get();
+
+        $department = Company::get();
         $vehcilemanufacturer = VehcileManufacturer::get();
 
-        return view('avms::visitor_request.create', compact('department', 'vehcilemanufacturer'));
+        $data = [
+            'title' => 'Visitor Request',
+            'department'=>$department,
+            'vehcilemanufacturer'=>$vehcilemanufacturer,
+        ];
+
+        return view('vms::visitor_request.create',$data);
+
     }
 
     /**

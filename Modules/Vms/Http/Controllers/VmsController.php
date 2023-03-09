@@ -31,10 +31,12 @@ class VmsController extends Controller
 
     public function index()
     {
-        $requested = Visitor::query()->where(['status' => 2])->count();
-        $reject = Visitor::query()->where(['status' => 4])->count();
-        $accept = Visitor::query()->where(['status' => 3])->count();
-        $visited = Visitor::query()->where(['status' => 1])->count();
+
+        $requested = Visitor::query()->where(['status' => 2,'department_id'=>auth()->user()->company_id])->count();
+        $reject = Visitor::query()->where(['status' => 4,'department_id'=>auth()->user()->company_id])->count();
+        $accept = Visitor::query()->where(['status' => 3,'department_id'=>auth()->user()->company_id])->count();
+        $visited = Visitor::query()->where(['status' => 1,'department_id'=>auth()->user()->company_id])->count();
+
         $total = Visitor::query()->count();
 
 
@@ -123,4 +125,6 @@ class VmsController extends Controller
     {
         //
     }
+
 }
+

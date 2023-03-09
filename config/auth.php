@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'vms_user' => [
+            'driver' => 'session',
+            'provider' => 'vms_users',
+
+
+        ],
+
     ],
 
     /*
@@ -63,6 +71,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'vms_users' => [
+            'driver' => 'eloquent',
+            'model' => \Modules\Vms\Entities\VisitorRegistration::class,
         ],
 
         // 'users' => [
@@ -89,6 +101,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'vms_user' => [
+            'provider' => 'vms_users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

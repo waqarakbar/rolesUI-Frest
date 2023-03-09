@@ -61,4 +61,6 @@ Route::prefix('vms')->group(function () {
 
         Route::post('visitor/logout', 'Auth\LoginController@logout')->name('visitor.auth.logout');
     });
+
 });
+

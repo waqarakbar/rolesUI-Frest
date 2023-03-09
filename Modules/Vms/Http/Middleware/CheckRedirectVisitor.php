@@ -16,10 +16,14 @@ class CheckRedirectVisitor
      */
     public function handle(Request $request, Closure $next)
     {
-//        if(auth()->guard('vms_user')->check()){
-//            return redirect()->route('send him to visitor page route'); //write route name for visitor page
-//        }
+
+       if(auth()->guard('vms_user')->check()){
+        return redirect()->route('visit.index');
+
+        //    return redirect()->route('send him to visitor page route'); //write route name for visitor page
+       }
 
         return $next($request);
     }
 }
+

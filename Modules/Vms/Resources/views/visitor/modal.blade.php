@@ -16,16 +16,23 @@
             </div>
             <div class="modal-body">
                 <form id="modalSubmit">
+
+                    <div class="form-group" id="">
+
+
+                        <textarea rows="2" cols="50" class="form-control" placeholder="Enter Comments" name="rejected_reason"></textarea>
+                    </div>
                     <input type="hidden" name="id" id="visitor_id" />
-                    <div class="form-group" id="rejected_reason" style="display:none;">
-                        <input type="text" class="form-control mt-2" placeholder="Enter Rejecting Reason"
-                            name="rejected_reason">
+
+                    <div class="form-group ">
+                        <input type="time" class="form-control col-md-6 " id="Mtime" name="visiting_time">
                     </div>
-                    <div class="row m-0 p-0 mt-2 ">
-                        <input type="time" class="form-control col-md-6" id="Mtime" name="visiting_time">
-                        <input type="date" id="visiting_date" class="form-control col-md-6 px-1 "
-                            name="visiting_date">
+                    <div class="form-group" id="">
+
+                        <input type="date" id="visiting_date" class="form-control  " name="visiting_date">
                     </div>
+
+
 
                     <div class="form-group float-right pt-2">
                         <button type="submit" class="btn btn-primary btn-sm">Submit</button>
@@ -33,6 +40,7 @@
                     </div>
                 </form>
             </div>
+
 
         </div>
     </div>
@@ -101,12 +109,13 @@
                 let form = $("#modalSubmit");
                 let formData = form.serializeArray();
                 var token = $('input[name="_token"]').val();
-                console.log(formData);
+
+                let visitorid = $("#visitor_id").val();
+                // console.log(formData);
                 $.ajax({
-                    url: `/app/visitor-managment/visitors/${formData[0].value}`,
+                    url: `/vms/visitors/${visitorid}`,
                     type: 'PUT',
-                    // dataType: "JSON",
-                    data: formData,
+                     data: formData,
                     headers: {
                         'X-CSRF-Token': token
                     },
