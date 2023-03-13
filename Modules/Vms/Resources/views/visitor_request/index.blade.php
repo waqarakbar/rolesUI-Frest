@@ -1,11 +1,14 @@
+
 @extends('layouts.app_screen_frest_vms')
 @php $app_id = config('vms.app_id') @endphp
+
 
 
 @section('content')
     <div class="row ">
         <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
             <div class="card">
+
                 <a href="{{ route('my.create') }}">
 
                     <div class="card-body">
@@ -24,6 +27,7 @@
                         </div>
                     </div>
                 </a>
+
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
@@ -41,10 +45,12 @@
                             </div>
                         </div>
                         <div id="incomeChart"></div>
+
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="col-lg-3 col-md-6 col-sm-6 mb-4">
             <div class="card">
                 <div class="card-body">
@@ -92,7 +98,9 @@
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="table-header">{{ __('Visitor Managment') }}</h4>
                         <div>
+
                             <a href="{{ route('my.create') }}" class="btn btn-primary">Create</a>
+
                         </div>
                     </div>
 
@@ -103,6 +111,7 @@
                             <table id="last-page-dt" class="table table-hover" style="width:100%">
                                 <thead>
                                     <tr>
+
                                         <th>Name</th>
                                         <th>Department</th>
                                         <th>Visit To</th>
@@ -110,6 +119,7 @@
                                         <th>Date</th>
                                         <th>Time</th>
                                         <th>Status</th>
+
 
                                         <th></th>
                                     </tr>
@@ -120,22 +130,27 @@
                         </div>
                     </div>
 
+
                 </div>
             </div>
         </div>
     </div>
+
 @endsection
 @push('stylesheets')
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 @endpush
 
 
 
 @push('scripts')
+
     <script src="{{ asset('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('assets/js/cards-statistics.js') }}"></script>
+
     <script src="{{ asset('assets/vendor/libs/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/datatables-responsive/datatables.responsive.js') }}"></script>
@@ -144,11 +159,13 @@
 
     <script>
         $(document).ready(function() {
+
             $('#last-page-dt').DataTable({
                 "pagingType": "full_numbers",
                 "lengthMenu": [7, 14, 21, 28],
                 "pageLength": 7,
                 "ajax": "{{ route('my.dashboard') }}",
+
                 "processing": true,
                 "serverSide": true,
                 "columns": [
@@ -169,12 +186,15 @@
                     },
 
                     {
+
                         data: 'department_name',
                         orderable: false,
+
                     },
 
 
                     {
+
                         data: 'visit_to_name',
                         orderable: false,
                         searchable: false,
@@ -194,6 +214,7 @@
                             return moment().format('hh:mm a');
                         }
                     },
+
                     {
                         data: 'status',
                         orderable: false,
@@ -234,6 +255,7 @@
                             let printbutton = data.status == 3 ? printBtn : '';
                             return printbutton;
                         }
+
                     }
 
                 ],
@@ -241,6 +263,7 @@
 
 
             });
+
 
 
 

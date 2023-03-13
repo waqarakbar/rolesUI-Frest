@@ -3,15 +3,18 @@
 
 
 @push('stylesheets')
+
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/apex-charts/apex-charts.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
+
 @endpush
 
 
 
 
 @section('content')
+
 <div class="row">
     <!-- Gamification Card -->
     <div class="col-lg-4 col-md-6 col-12 mb-4">
@@ -370,3 +373,4 @@
     })();
 </script>
 @endpush
+

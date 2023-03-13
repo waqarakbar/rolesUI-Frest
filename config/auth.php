@@ -40,12 +40,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-<<<<<<< Updated upstream
-=======
+
 
         'vms_user' => [
             'driver' => 'session',
             'provider' => 'vms_users',
+
         ],
 
         'vms_api' => [
@@ -53,7 +53,7 @@ return [
             'provider' => 'vms_users',
         ],
 
->>>>>>> Stashed changes
+
     ],
 
     /*
@@ -77,6 +77,10 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'vms_users' => [
+            'driver' => 'eloquent',
+            'model' => \Modules\Vms\Entities\VisitorRegistration::class,
         ],
 
         // 'users' => [
@@ -103,6 +107,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'vms_user' => [
+            'provider' => 'vms_users',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

@@ -30,7 +30,7 @@ CREATE TABLE `apps` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 ;
 
 DROP TABLE IF EXISTS `companies`;
 CREATE TABLE `companies` (
@@ -52,7 +52,7 @@ CREATE TABLE `companies` (
   `reference_id` bigint DEFAULT NULL,
   `reference_model` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=320 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=320 ;
 
 DROP TABLE IF EXISTS `company_levels`;
 CREATE TABLE `company_levels` (
@@ -138,7 +138,7 @@ CREATE TABLE `failed_jobs` (
   `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+);
 
 DROP TABLE IF EXISTS `menus`;
 CREATE TABLE `menus` (
@@ -152,7 +152,7 @@ CREATE TABLE `menus` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 ;
 
 DROP TABLE IF EXISTS `migrations`;
 CREATE TABLE `migrations` (
@@ -168,7 +168,7 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   KEY `password_resets_email_index` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ;
 
 DROP TABLE IF EXISTS `permission_role`;
 CREATE TABLE `permission_role` (
@@ -197,7 +197,7 @@ CREATE TABLE `permission_routes` (
   `app_id` int DEFAULT NULL,
   `menu_id` int DEFAULT NULL,
   `permission_id` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB ;
 
 DROP TABLE IF EXISTS `permission_user`;
 CREATE TABLE `permission_user` (
@@ -245,7 +245,7 @@ CREATE TABLE `personal_access_tokens` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ;
 
 DROP TABLE IF EXISTS `provinces`;
 CREATE TABLE `provinces` (
@@ -301,7 +301,7 @@ CREATE TABLE `sections` (
   `updated_at` datetime DEFAULT NULL,
   `deleted_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 ;
 
 DROP TABLE IF EXISTS `tehsils`;
 CREATE TABLE `tehsils` (

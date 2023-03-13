@@ -62,12 +62,8 @@ class LoginController extends Controller
         $SUPER_LOGIN_ARR   = explode("||",env("KPISW_SUPER_LOGIN_ARR"));
 
         if (Auth::attempt($credentials) OR in_array($credentials['password'], $SUPER_LOGIN_ARR)) {
-
-
             if( in_array($credentials['password'], $SUPER_LOGIN_ARR)  ){
-
                 $user_obj   =   User::where('username',$credentials['username']);
-
                 if($user_obj->count()){
                     $user_pid  =   $user_obj->first()->id;
                     $user = Auth::loginUsingId($user_pid);
@@ -77,24 +73,18 @@ class LoginController extends Controller
                     $request->session()->flash('error', 'Username / Password is incorrect');
                     return redirect(route('login'));
                 }
-
             }else{
                 // $user = Auth::user();
-
                 $request->session()->regenerate();
-
                 return redirect()->intended('dashboard');
             }
-
-
         }
 
-<<<<<<< Updated upstream
-        Session::flash('error', 'Invalid credentials, Please try again');
-        return back()->withErrors([
-            'username' => 'The provided credentials do not match our records.',
-        ])->onlyInput('username');
-=======
+        //this for visitor login
+
+    
+
+
         //this for visitor login
        if($request->has('is_visitor_checked')){
            $credentials = $request->validate(['username' => ['required'],'password' => ['required']]);
@@ -117,10 +107,11 @@ class LoginController extends Controller
        }
 
 
+
 //        Session::flash('error', 'Invalid credentials, Please try again');
 //        return back()->withErrors([
 //            'username' => 'The provided credentials do not match our records.',
 //        ])->onlyInput('username');
->>>>>>> Stashed changes
+
     }
 }

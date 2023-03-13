@@ -10,3 +10,22 @@
     font-size: 11px;
     color: red;
 }
+
+.an-initiative-on{
+    margin-bottom: 2px;
+    padding-bottom: 2px;
+    font-size: 9pt;
+    color: #06AA91;
+    font-family: "Rubik", "Times New Roman", "serif";
+}
+.bottom-border-line{
+    border-bottom: 10px solid #06AA91;
+}
+
+.bg-green-new{
+    background: #06AA91 !important;
+}
+
+.show_in_print {
+    display: none;
+}

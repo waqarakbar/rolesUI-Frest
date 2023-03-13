@@ -11,12 +11,14 @@ use Spatie\MediaLibrary\HasMedia;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 class VisitorRegistration extends Authenticatable implements HasMedia,JWTSubject
 {
 
     use HasFactory, SoftDeletes, InteractsWithMedia, HasApiTokens, Notifiable;
+
     protected $connection = "vms";
     protected $table = 'users';
     /**
@@ -73,6 +75,7 @@ class VisitorRegistration extends Authenticatable implements HasMedia,JWTSubject
     }
 
 
+
     public function getJWTIdentifier()
     {
         return $this->getKey();
@@ -82,4 +85,5 @@ class VisitorRegistration extends Authenticatable implements HasMedia,JWTSubject
     {
         return [];
     }
+
 }
