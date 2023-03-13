@@ -40,6 +40,20 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+<<<<<<< Updated upstream
+=======
+
+        'vms_user' => [
+            'driver' => 'session',
+            'provider' => 'vms_users',
+        ],
+
+        'vms_api' => [
+            'driver' => 'jwt',
+            'provider' => 'vms_users',
+        ],
+
+>>>>>>> Stashed changes
     ],
 
     /*
