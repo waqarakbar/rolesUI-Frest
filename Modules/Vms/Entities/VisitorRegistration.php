@@ -12,10 +12,13 @@ use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class VisitorRegistration extends Authenticatable implements HasMedia 
+use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+
+class VisitorRegistration extends Authenticatable implements HasMedia,JWTSubject
 {
 
-    use HasFactory, SoftDeletes, InteractsWithMedia,HasApiTokens, Notifiable;
+    use HasFactory, SoftDeletes, InteractsWithMedia, HasApiTokens, Notifiable;
+
     protected $connection = "vms";
     protected $table = 'users';
     /**
@@ -70,4 +73,17 @@ class VisitorRegistration extends Authenticatable implements HasMedia
     {
         return $this->getFirstMediaUrl('cnic_back');
     }
+
+
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
+
 }

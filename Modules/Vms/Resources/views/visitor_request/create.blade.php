@@ -1,4 +1,6 @@
-@extends('layouts.' . config('vms.active_layout'))
+
+@extends('layouts.app_screen_frest_vms')
+
 @php $app_id = config('vms.app_id') @endphp
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
@@ -25,7 +27,9 @@
                         <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
                             <div class="widget-content widget-content-area br-6">
 
-                                {!! Form::open(['route' => 'visit.store', 'files' => true, 'method' => 'POST']) !!}
+
+                                {!! Form::open(['route' => 'my.store', 'files' => true, 'method' => 'POST']) !!}
+
                                 <div class="row">
 
 

@@ -57,7 +57,6 @@
 
 
 
-
                                     <div class="col-xs-12 col-sm-12 col-md-6 Vehicle_option">
                                         <div class="form-group">
                                             <label>Vehicle:</label>
@@ -130,7 +129,8 @@
                                         <div class="form-group">
 
                                             <label>Officer </label>
-                                            <select class="select2-multiple  form-control" required name="visit_to_id">
+                   <select class="select2-multiple  form-control" name="visit_to_id">
+
 
                                                 <option value="">Select Officer</option>
                                                 {{-- @foreach ($user as $value)

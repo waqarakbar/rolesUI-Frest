@@ -24,13 +24,7 @@ use Auth;
 class VisitorController extends Controller
 {
 
-    // function __construct()
-    // {
-    //     $this->middleware('permission:visitor-list|visitor-create|visitor-edit|visitor-delete|epass-list', ['only' => ['index', 'store']]);
-    //     $this->middleware('permission:visitor-create', ['only' => ['create', 'store']]);
-    //     $this->middleware('permission:visitor-edit', ['only' => ['edit', 'update']]);
-    //     $this->middleware('permission:visitor-delete', ['only' => ['destroy']]);
-    // }
+
 
     public function print($id)
     {
@@ -107,7 +101,6 @@ class VisitorController extends Controller
     {
         $data = [
             'title' => 'Epass Visitor',
-
             'gate' => Gate::get(),
         ];
         return view('vms::visitor.epass', $data);

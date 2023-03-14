@@ -15,8 +15,14 @@
 Route::prefix('vms')->group(function () {
 
 
-    //Vistior Registration and Login 
-    // Route::get('visitor/register', 'VmsController@register')->name('vms.visitor.register');
+
+    Route::group(['prefix' => 'my'], function () {
+        Route::get('dashboard', 'VisitRequestController@dashboard')->name('my.dashboard');
+        Route::get('create', 'VisitRequestController@create')->name('my.create');
+        Route::Post('store', 'VisitRequestController@store')->name('my.store');
+        Route::get('print/{id}', 'VisitRequestController@print')->name('my.print');
+
+    });
 
 
     Route::middleware(['auth'])->group(function () {
@@ -38,13 +44,11 @@ Route::prefix('vms')->group(function () {
             Route::get('epass', 'VisitorController@epass')->name('visitor.epass');
             Route::get('epass/update', 'VisitorController@epass_update')->name('epass.visitors.update');
             Route::get('info/{id}', 'VisitorController@info')->name('visitor.info');
-            Route::get('dashboard', 'VisitRequestController@dashboard')->name('visitor.dashboard');
+
             Route::resource('visit', VisitRequestController::class);
             Route::get('print/{id}', [VisitRequestController::class, 'print'])->name('visit.print');
         });
     });
-
-
 
 
     // visitor account and its routes 
@@ -52,15 +56,7 @@ Route::prefix('vms')->group(function () {
         Route::get('register', 'RegisterController@showRegistrationForm')->name('visitor.register.view');
         Route::post('register', 'RegisterController@register')->name('visitor.register');
 
-        //  Route::get('login', 'LoginController@showLoginForm')->name('visitor.auth');
-        Route::get('login', [LoginController::class, 'showLoginForm'])->name('visitor.auth');
-
-        Route::get('login/email', 'LoginController@showLoginForm')->name('visitor.auth.email');
-        Route::post('login/email', 'LoginController@before_login')->name('visitor.auth.postemail');
-        Route::post('login/email/password', 'LoginController@login')->name('visitor.auth.postemailpassword');
-
         Route::post('visitor/logout', 'Auth\LoginController@logout')->name('visitor.auth.logout');
     });
-
 });
 

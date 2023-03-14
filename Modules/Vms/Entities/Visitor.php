@@ -51,14 +51,16 @@ class Visitor extends Model
             case 1:
                 $text = "Visited";
                 break;
-            case 1:
+
+            case 2:
                 $text = "Requested";
                 break;
-            case 1:
+            case 3:
                 $text = "Approved";
                 break;
-            case 1:
-                $text = "Rejected";
+            case 4:
+                $text = "Reshudule";
+
                 break;
         }
 
@@ -84,4 +86,6 @@ class Visitor extends Model
     {
         return VisitorRegistration::where('id', $this->user_id)->value('name') ?? '';
     }
+
 }
+

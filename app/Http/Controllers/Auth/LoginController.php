@@ -82,13 +82,27 @@ class LoginController extends Controller
 
         //this for visitor login
 
+    
+
+
+        //this for visitor login
        if($request->has('is_visitor_checked')){
            $credentials = $request->validate(['username' => ['required'],'password' => ['required']]);
            $credentials = ['email'=>$request->username, 'password'=>$request->password];
            if($auth = Auth::guard('vms_user')->attempt($credentials)){
 
-             dd(Auth::guard('vms_user')->user()->name);
+            // pr($auth);        
 
+            // dd(Auth::guard('vms_user')->user()->name);
+            
+            return redirect()->route('my.dashboard');
+
+           }
+           else{
+       Session::flash('error', 'Invalid credentials, Please try again');
+       return back()->withErrors([
+           'username' => 'The provided credentials do not match our records.',
+       ])->onlyInput('username');
            }
        }
 
@@ -98,5 +112,6 @@ class LoginController extends Controller
 //        return back()->withErrors([
 //            'username' => 'The provided credentials do not match our records.',
 //        ])->onlyInput('username');
+
     }
 }

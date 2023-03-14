@@ -85,6 +85,7 @@
                     <th colspan="2">{{ UcFirst($visitor->user()->exists() ? $visitor->user->name : '') }}</th>
 
                 </tr>
+
             </thead>
             <tbody>
                 <tr>

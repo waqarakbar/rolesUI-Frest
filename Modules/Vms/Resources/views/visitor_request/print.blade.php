@@ -111,7 +111,9 @@
         </p>
     </div>
     <button id="btnPrint" class="hidden-print">Print</button>
-    <a href="{{ route('dashboard') }}" class="hidden-print">back</a>
+
+    <a href="{{ route('my.dashboard') }}" class="hidden-print">back</a>
+
     <script>
         const $btnPrint = document.querySelector("#btnPrint");
         $btnPrint.addEventListener("click", () => {
