@@ -81,6 +81,7 @@ class LoginController extends Controller
         }
 
         //this for visitor login
+
        if($request->has('is_visitor_checked')){
            $credentials = $request->validate(['username' => ['required'],'password' => ['required']]);
            $credentials = ['email'=>$request->username, 'password'=>$request->password];
@@ -106,5 +107,6 @@ class LoginController extends Controller
 //        return back()->withErrors([
 //            'username' => 'The provided credentials do not match our records.',
 //        ])->onlyInput('username');
+
     }
 }

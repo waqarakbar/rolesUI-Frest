@@ -41,15 +41,17 @@ return [
             'provider' => 'users',
         ],
 
+
         'vms_user' => [
             'driver' => 'session',
             'provider' => 'vms_users',
-        ],
+
 
         'vms_api' => [
             'driver' => 'jwt',
             'provider' => 'vms_users',
         ],
+
 
     ],
 

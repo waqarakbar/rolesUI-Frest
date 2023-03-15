@@ -91,13 +91,16 @@
             <!-- Menu -->
 
 
-            <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-                <div class="app-brand demo">
-                    <a href="{{ route('home') }}" class="app-brand-link">
-                        <span class="app-brand-text demo menu-text fw-bold ms-2">
-                            <img src="{{ asset('assets/site-images/logo.png') }}" width="150">
-                        </span>
-                    </a>
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+            <div class="app-brand demo">
+                <a href="{{route('home')}}" class="app-brand-link">
+                    <span class="app-brand-text demo menu-text fw-bold ms-2">
+                        <img src="{{asset('assets/site-images/logo.png')}}" width="150">
+                    </span>
+                </a>
+
+
 
                     {{-- <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
                     <i class="bx menu-toggle-icon d-none d-xl-block fs-4 align-middle"></i>
@@ -240,6 +243,7 @@
             <div class="layout-page">
                 <!-- Navbar -->
 
+
                 <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme"
                     id="layout-navbar">
                     <div class="container-fluid">
@@ -248,6 +252,9 @@
                                 <i class="bx bx-menu bx-sm"></i>
                             </a>
                         </div>
+
+
+                        <ul class="navbar-nav flex-row align-items-center ms-auto">
 
                         <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
                             <!-- Search -->
@@ -263,6 +270,9 @@
 
                             <ul class="navbar-nav flex-row align-items-center ms-auto">
                                 {{--
+
+
+
                             <!-- Language -->
                             <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
@@ -642,52 +652,60 @@
                                 </ul>
                             </li>
                             <!--/ Notification -->
-                            --}}
-                                <!-- User -->
-                                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                                    <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
-                                        data-bs-toggle="dropdown">
-                                        <div class="avatar avatar-online">
-                                            <i class="fa fa-user fa-2x"></i>
-                                        </div>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end">
-                                        <li>
-                                            <a class="dropdown-item" href="javascript:;">
-                                                <div class="d-flex">
-                                                    <div class="flex-shrink-0 me-3">
-                                                        <div class="avatar avatar-online">
-                                                            <div class="avatar avatar-online">
-                                                                <i class="fa fa-user fa-2x"></i>
-                                                            </div>
-                                                        </div>
+
+
+                            <!-- User -->
+                            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                                    <div class="avatar avatar-online">
+                                        <i class="fa fa-user fa-2x"></i>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li>
+                                        <a class="dropdown-item" href="javascript:;">
+                                            <div class="d-flex">
+                                                <div class="flex-shrink-0 me-3">
+                                                    <div class="avatar avatar-online">
+
+                                                        <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="rounded-circle" />
+
+
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <span
                                                             class="fw-semibold d-block lh-1">{{ auth()->user()->name }}</span>
                                                         {{--                                                    <small>Admin</small> --}}
+
+
                                                     </div>
                                                 </div>
-                                            </a>
-                                        </li>
 
-                                        <li>
-                                            <div class="dropdown-divider"></div>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ route('settings.users-mgt.my-profile') }}">
-                                                <i class="bx bx-user me-2"></i>
-                                                <span class="align-middle">My Profile</span>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item"
-                                                href="{{ route('settings.users-mgt.change-password') }}">
-                                                <i class="bx bx-cog me-2"></i>
-                                                <span class="align-middle">Change Password</span>
-                                            </a>
-                                        </li>
+                                                <div class="flex-grow-1">
+                                                    <span class="fw-semibold d-block lh-1">{{auth()->user()->name}}</span>
+{{--                                                    <small>Admin</small>--}}
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <div class="dropdown-divider"></div>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{route('settings.users-mgt.my-profile')}}">
+                                            <i class="bx bx-user me-2"></i>
+                                            <span class="align-middle">My Profile</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="{{route('settings.users-mgt.change-password')}}">
+                                            <i class="bx bx-cog me-2"></i>
+                                            <span class="align-middle">Change Password</span>
+                                        </a>
+                                    </li>
+
+
 
                                         <li>
                                             <div class="dropdown-divider"></div>
@@ -767,6 +785,7 @@
                                     </span>
                                 @endif
 
+
                             @endif
 
                             {{ $title ?? '' }}
@@ -799,6 +818,8 @@
                         </div>
 
 
+
+
                         @yield('content')
 
 
@@ -819,7 +840,36 @@
 
                     <div class="content-backdrop fade"></div>
                 </div>
-                <!-- Content wrapper -->
+
+                <!-- / Content -->
+
+                <!-- Footer -->
+                <footer class="content-footer footer bg-footer-theme bottom-border-line">
+                    <div class="container-fluid d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
+                        <div class="mb-2 mb-md-0">
+                            <h3 class="text-center an-initiative-on">An Initiative of</h3>
+                            <img src="{{asset('assets/site-images/logo-bottom.png')}}" width="300"/>
+                        </div>
+
+                    </div>
+                    <!-- / Content -->
+
+                    <!-- Footer -->
+                    <footer class="content-footer footer bg-footer-theme bottom-border-line">
+                        <div
+                            class="container-fluid d-flex flex-wrap justify-content-center py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                <h3 class="text-center an-initiative-on">An Initiative of</h3>
+                                <img src="{{ asset('assets/site-images/logo-bottom.png') }}" width="300" />
+                            </div>
+                        </div>
+                    </footer>
+                    <!-- / Footer -->
+
+
+                <div class="content-backdrop fade"></div>
+
+
             </div>
             <!-- / Layout page -->
         </div>
